@@ -2,3 +2,4 @@
 code/venv
 dataset/raw/archive
 dataset/raw/archive.zip
+__pycache__/

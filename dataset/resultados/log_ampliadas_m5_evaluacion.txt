@@ -1,0 +1,31 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795097564.603037   17872 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795097567.984665   17872 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+M5 Evaluación en prueba
+Versiones: pandas 3.0.6, scikit-learn 1.9.1, tensorflow 2.21.0, statsmodels 0.15.0
+ARIMA: 0 filas de prueba con MM4 por falta de parámetros
+SARIMA: 0 filas de prueba con MM4 por falta de parámetros
+A1: GradientBoosting: MAE 0.350 frente a MM4 0.471; le gana en 3 de 3 métricas -> éxito: sí
+A1: LSTM: MAE 0.390 frente a MM4 0.471; le gana en 2 de 3 métricas -> éxito: sí
+A1: ARIMA: MAE 0.467 frente a MM4 0.471; le gana en 1 de 3 métricas -> éxito: no
+A1: SARIMA: MAE 0.499 frente a MM4 0.471; le gana en 1 de 3 métricas -> éxito: no
+A2: siempre 0 da MAE 0.354 y accuracy 79.4%; 79.4% de las filas de prueba tiene 0 unidades
+A3: prueba tiene 432 unidades frente a 675 de validación
+A4: repetir la semana anterior tiene MAE 1.347 en entrenamiento + validación y 0.493 en prueba
+          modelo  vp  fp  fn  vn
+             MM4 144 225 108 745
+GradientBoosting  83  72 169 898
+            LSTM 105 118 147 852
+           ARIMA 123 166 129 804
+          SARIMA 146 200 106 770
+       Siempre 0   0   0 252 970
+          modelo   mae  rmse   smape  accuracy  precision  recall    f1    sesgo  supera_mm4 vigente
+             MM4 0.471 0.849  95.297     0.727      0.390   0.571 0.464    4.051        <NA>      no
+GradientBoosting 0.350 0.814  48.155     0.803      0.535   0.329 0.408  -64.973           3      sí
+            LSTM 0.390 0.805 185.021     0.783      0.471   0.417 0.442  -34.019           2      no
+           ARIMA 0.467 0.876 142.691     0.759      0.426   0.488 0.455    3.174           1      no
+          SARIMA 0.499 0.811 161.212     0.750      0.422   0.579 0.488   21.119           1      no
+       Siempre 0 0.354 0.920  41.244     0.794      0.000   0.000 0.000 -100.000        <NA>      no
+1222 filas -> ../../dataset/processed/05_predicciones.csv; 6 filas -> ../../dataset/processed/05_metricas.csv; matriz -> ../../dataset/processed/05_matriz_confusion.csv

@@ -1,0 +1,29 @@
+M3 Partición temporal y ventanas
+<class 'pandas.DataFrame'>
+RangeIndex: 32364 entries, 0 to 32363
+Data columns (total 9 columns):
+ #   Column           Non-Null Count  Dtype         
+---  ------           --------------  -----         
+ 0   semana_inicio    32364 non-null  datetime64[us]
+ 1   plato            32364 non-null  str           
+ 2   categoria        32364 non-null  str           
+ 3   unidades         32364 non-null  int64         
+ 4   ventas           32364 non-null  float64       
+ 5   costo            32364 non-null  float64       
+ 6   margen           32364 non-null  float64       
+ 7   precio_unitario  27950 non-null  float64       
+ 8   activo           32364 non-null  int64         
+dtypes: datetime64[us](1), float64(4), int64(2), str(2)
+memory usage: 2.2 MB
+A1: entrenamiento: 470 semanas, 2016-06-27 a 2025-06-23
+A1: validacion: 26 semanas, 2025-06-30 a 2025-12-22
+A1: prueba: 26 semanas, 2025-12-29 a 2026-06-22
+A2: estado de los platos: {'modelable': 55, 'retirado': 6, 'historial_insuficiente': 1}
+A2: fuera de los modelos: African Coke (retirado), Asun goat meat (historial_insuficiente), Beans Puree (Ewa Again) (retirado), Fried Rice (Sharing Pack Plain) (retirado), Packs of Edikan-Ikong (Pre-order) (retirado), Packs of Egusi (retirado), Sphagetti Meatballs (retirado)
+A3: 32364 filas de M2 -> 25204 filas con ventana completa
+               filas  unidades
+conjunto                      
+entrenamiento  22344     29647
+prueba          1430       463
+validacion      1430       461
+25204 filas, 55 platos -> ../../dataset/processed/03_ventanas_mm4.csv, ../../dataset/processed/03_ventanas_xgboost.csv, ../../dataset/processed/03_ventanas_lstm.csv

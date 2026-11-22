@@ -16,7 +16,8 @@ Pasos:
      Con el dataset de la tesis (157 semanas) da 105 / 26 / 26.
   3. Selección de platos: aplicar la regla de estado_plato con lo que se sabe al final
      del entrenamiento y quedarse con los modelables.
-  4. Ventanas: para cada semana a predecir, tomar las 8 semanas activas anteriores.
+  4. Ventanas: para cada semana a predecir, tomar las 8 semanas activas anteriores y calcular la
+     tendencia (media de 8 semanas frente a la media de hasta 52 semanas).
   5. Archivos por modelo: elegir las columnas de MM4, XGBoost y LSTM.
   6. Controles de calidad: comprobar filas, partición y valores.
   7. Exportación: escribir los cinco CSV.
@@ -44,6 +45,10 @@ HISTORIA_MM4 = 4
 HISTORIA_LSTM = 8
 # Un plato necesita al menos 26 semanas de historia para entrar a los modelos.
 SEMANAS_MINIMAS = 26
+# Tendencia: compara la media de las 8 semanas anteriores con la de hasta 52 semanas anteriores.
+# Se suma 0,1 a las dos medias (igual que el nivel de M4) para poder dividir cuando son 0.
+SEMANAS_TENDENCIA = 52
+NIVEL_MINIMO = 0.1
 
 # Clasifica si un plato es modelable o no
 def clasificar_plato(primera_venta, ultima_venta, fin_entrenamiento, inicio_ultimas):
@@ -164,6 +169,7 @@ platos_modelables = resumen.loc[resumen['estado_plato'] == 'modelable', 'plato']
 # V2: cada semana a predecir necesita 8 semanas activas antes, así los tres archivos tienen las mismas filas
 # V3: las variables de la ventana usan solo semanas anteriores a la semana a predecir
 # V4: el conjunto de cada fila es el de su semana a predecir
+# V5: la tendencia compara la media de 8 semanas con la de hasta 52 semanas, ambas anteriores a la semana a predecir
 ###### Importante en la documentación especificar el por qué se utilizan # de semanas especifico. ####
 # ---------------------------------------------------------------------------
 
@@ -186,6 +192,19 @@ for k in range(1, HISTORIA_LSTM + 1):
     filas[f'cos_t{k}'] = por_plato['cos'].shift(k)
 # Semana de u_t8, para comprobar en C6 que la ventana es de semanas seguidas
 filas['semana_t8'] = por_plato['semana_inicio'].shift(HISTORIA_LSTM)
+
+# V5: tendencia = log((media de 8 semanas + 0,1) / (media de hasta 52 semanas + 0,1)), solo con el pasado.
+# 0 = demanda estable; negativa = en caída (-0,69 es la mitad de lo habitual); positiva = en alza (+0,69, el doble).
+# Le dice a los modelos si el nivel reciente es normal o está por encima o por debajo de lo que el plato
+# suele vender. La media larga usa las semanas activas que haya (al menos 8), así no se pierden las primeras
+# filas de cada plato ni cuentan las semanas antes de su lanzamiento (V1).
+pasado = por_plato['unidades'].shift(1)
+media_8 = (pasado.groupby(filas['plato']).rolling(HISTORIA_LSTM, min_periods=HISTORIA_LSTM)
+           .mean().reset_index(level=0, drop=True))
+media_larga = (pasado.groupby(filas['plato']).rolling(SEMANAS_TENDENCIA, min_periods=HISTORIA_LSTM)
+               .mean().reset_index(level=0, drop=True))
+filas['tendencia'] = np.log((media_8 + NIVEL_MINIMO) / (media_larga + NIVEL_MINIMO))
+filas['media_8_tendencia'] = media_8  # solo para el control C6b
 
 # V2: si no hay valor 8 semanas atrás, la fila no tiene la ventana completa de la LSTM
 filas = filas[filas[f'u_t{HISTORIA_LSTM}'].notna()].reset_index(drop=True)
@@ -220,13 +239,15 @@ filas['media_4'] = filas[[f'u_t{k}' for k in range(1, HISTORIA_MM4 + 1)]].mean(a
 filas['semana_sin'] = filas['sin']
 filas['semana_cos'] = filas['cos']
 filas['mes'] = filas['semana_objetivo'].dt.month
-columnas_xgboost = columnas_mm4 + ['media_4', 'semana_sin', 'semana_cos', 'mes', 'precio_t1']
+columnas_xgboost = columnas_mm4 + ['media_4', 'semana_sin', 'semana_cos', 'mes', 'precio_t1', 'tendencia']
 xgboost = pd.concat([filas[columnas_xgboost], plato_0_1, categoria_0_1], axis=1)
 
 # LSTM: la secuencia de t-8 a t-1. M4 la pasa a forma (muestras, 8 pasos, variables).
+# La tendencia es una variable fija de la fila, como el plato: M4 la repite en los 8 pasos.
 columnas_lstm = list(columnas_comunes)
 for variable in ['u', 'precio', 'sin', 'cos']:
     columnas_lstm += [f'{variable}_t{k}' for k in range(HISTORIA_LSTM, 0, -1)]
+columnas_lstm += ['tendencia']
 lstm = pd.concat([filas[columnas_lstm], plato_0_1], axis=1)
 
 # ---------------------------------------------------------------------------
@@ -259,6 +280,11 @@ assert lstm.notna().all().all(), 'Hay valores vacíos en LSTM'
 assert ((filas['semana_objetivo'] - filas['semana_t8']).dt.days == 7 * HISTORIA_LSTM).all(), \
     'Hay ventanas con semanas saltadas o que miran hacia adelante'
 
+# C6b: la tendencia usa la misma media de 8 semanas que la ventana (u_t1 a u_t8), así está bien alineada
+assert np.allclose(filas['media_8_tendencia'], filas[[f'u_t{k}' for k in range(1, HISTORIA_LSTM + 1)]].mean(axis=1)), \
+    'La media de 8 semanas de la tendencia no coincide con la ventana'
+assert np.isfinite(filas['tendencia']).all(), 'Hay tendencias vacías o infinitas'
+
 # C7: la demanda no puede ser negativa
 assert (mm4[['y_real'] + [f'u_t{k}' for k in range(1, HISTORIA_MM4 + 1)]] >= 0).all().all(), \
     'Hay unidades negativas'
@@ -277,6 +303,10 @@ for conjunto in ['entrenamiento', 'validacion', 'prueba']:
 print(f"A2: estado de los platos: {resumen['estado_plato'].value_counts().to_dict()}")
 excluidos = resumen[resumen['estado_plato'] != 'modelable']
 print(f"A2: fuera de los modelos: {', '.join(excluidos['plato'] + ' (' + excluidos['estado_plato'] + ')')}")
+
+# A4: cómo se reparte la tendencia en cada conjunto (negativa = el plato vende menos que su media de un año)
+print('A4: mediana de la tendencia por conjunto:',
+      filas.groupby('conjunto')['tendencia'].median().round(3).to_dict())
 
 # A3: filas de la serie de M2 y filas que quedan para los modelos
 print(f'A3: {len(df)} filas de M2 -> {len(filas)} filas con ventana completa')

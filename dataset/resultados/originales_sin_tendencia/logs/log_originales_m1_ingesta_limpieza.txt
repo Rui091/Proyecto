@@ -1,0 +1,35 @@
+M1 Ingesta y limpieza
+<class 'pandas.DataFrame'>
+RangeIndex: 4385 entries, 0 to 4384
+Data columns (total 14 columns):
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   OrderID         4385 non-null   str    
+ 1   Date            4385 non-null   str    
+ 2   DayOfWeek       4385 non-null   str    
+ 3   Time            4385 non-null   str    
+ 4   Category        4385 non-null   str    
+ 5   Line item name  4385 non-null   str    
+ 6   Quantity        4385 non-null   int64  
+ 7   Price Per Item  4385 non-null   float64
+ 8   Gross Sales     4385 non-null   float64
+ 9   Est. Cost       4385 non-null   float64
+ 10  Est. Profit     4385 non-null   float64
+ 11  OrderType       4385 non-null   str    
+ 12  Payment         4385 non-null   str    
+ 13  Cancelled       4385 non-null   str    
+dtypes: float64(4), int64(1), str(9)
+memory usage: 479.7 KB
+Las 24 líneas canceladas son de 10 pedidos
+L1 canceladas: 24 filas quitadas
+L2 cantidad <= 0: 0 filas quitadas
+L3 precio < 0: 0 filas quitadas
+L4 fecha inválida: 0 filas quitadas
+C10: las fechas van de 2023-01-03 a 2025-12-31
+C13: 8 líneas con precio 0
+cantidad          7118.00
+ventas_brutas    38480.25
+costo            13461.90
+margen           25018.35
+dtype: float64
+4361 filas, 62 platos -> ../../dataset/processed/01_ventas_limpias.csv

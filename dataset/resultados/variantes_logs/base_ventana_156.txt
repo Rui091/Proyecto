@@ -1,0 +1,12 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795034935.713505   29028 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795034937.906657   29028 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+M7 Validación cruzada de series de tiempo
+Variante: peso=None, ventana=156, tendencia=False -> archivos con sufijo "_ventana156"
+Ganadores de M4: GB {'l2_regularization': 0.0, 'learning_rate': 0.03, 'loss': 'absolute_error', 'max_depth': 4, 'max_features': 0.8, 'min_samples_leaf': 20, 'max_iter': 233}; LSTM {'batch_size': 32, 'capas': 2, 'dropout': 0.3, 'learning_rate': 0.01, 'unidades': 16} x 5 épocas; ARIMA (2, 1, 0); SARIMA (0, 1, 1)(0, 1, 1, 4)
+305 semanas objetivo: 5 folds de 26 semanas
+Traceback (most recent call last):
+  File "C:\Users\Ruiyu\OneDrive\Documents\Trabajo\Trabajo-de-grado\code\src\m7_validacion_cruzada.py", line 252, in <module>
+    es_train &= (mm4['semana_objetivo'] >= inicio_prueba - pd.Timedelta(weeks=opciones.ventana)).to_numpy()
+ValueError: output array is read-only

@@ -1,0 +1,63 @@
+plato,categoria,estado_plato,semana_pronostico,unidades_ultima_semana,unidades_pronosticadas,unidades_redondeadas,metodo,pred_mm4,pred_gradient_boosting,pred_lstm,pred_arima,pred_sarima,lun,mar,mie,jue,vie,sab,reparto_dia_segun
+African Coke,Drinks,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+African Fanta,Drinks,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Amala (Dried Yam Flour),Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.5223,0,0,0,0,0,0,categoria
+Assorted Meat,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,0.0161,0.3099,0.1347,0,0,0,0,0,0,categoria
+Assorted Meat Pepper Soup,Apetisers,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.3391,0.0000,0.4645,0,0,0,0,0,0,categoria
+Assorted Meat Stew,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.0000,0,0,0,0,0,0,categoria
+Asun goat meat,Apetisers,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Ayamase Sauce,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.1632,0.0000,0.3621,0,0,0,0,0,0,categoria
+Beans,Special orders,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.1421,0,0,0,0,0,0,menu
+Beans Puree (Ewa Again),Special orders,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Beef Stew,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.1481,0,0,0,0,0,0,categoria
+Beef Suya,Apetisers,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0168,0.0000,0.4413,0,0,0,0,0,0,categoria
+Bitterleaf soup,Soups,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Boiled Rice,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.4839,0,0,0,0,0,0,categoria
+Boiled Rice with Designer Stew - Ayamase,Main courses,modelable,2026-01-05,2,0.9996,1,GradientBoosting,1.7500,0.9996,0.8029,1.5341,0.7565,0,0,1,0,0,0,plato
+Bottle Water,Drinks,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.1552,0,0,0,0,0,0,categoria
+Buns,Apetisers,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0108,0.0000,0.3544,0,0,0,0,0,0,categoria
+Chicken Stew,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.2341,0,0,0,0,0,0,categoria
+Chicken Suya,Apetisers,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0338,0.0000,0.3775,0,0,0,0,0,0,categoria
+Chin Chin,Apetisers,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0401,0.0000,0.3521,0,0,0,0,0,0,categoria
+Coke 330ml,Drinks,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,0.0168,0.2361,0.2140,0,0,0,0,0,0,categoria
+Coleslaw,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0108,0.0000,0.2967,0,0,0,0,0,0,categoria
+Efo Riro,Soups,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.9029,0.0000,1.4964,0,0,0,0,0,0,plato
+Egusi (Melon Soup),Soups,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,0.7665,0.0000,1.5826,0,0,0,0,0,0,plato
+Ewedu & Gbegiri (NEW),Soups,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0108,0.0000,0.2858,0,0,0,0,0,0,categoria
+Extra Stew,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.0000,0,0,0,0,0,0,categoria
+Fried Fish,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0078,0.0000,0.2699,0,0,0,0,0,0,categoria
+Fried Plantain - Dodo,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,0.5789,0.0000,1.5127,0,0,0,0,0,0,plato
+Fried Rice,Main courses,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0620,0.0000,0.1557,0,0,0,0,0,0,categoria
+Fried Rice (Sharing Pack Plain),Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Fried Yam,Apetisers,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Gari (Dried Cassava Flour),Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.0031,0,0,0,0,0,0,categoria
+Goat Meat Peppersoup,Apetisers,historial_insuficiente,2026-01-05,1,0.5000,1,media_movil,,,,,,0,0,1,0,0,0,categoria
+Grilled Tilapia Fish,Special orders,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Jolof,Main courses,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0108,0.0000,0.0863,0,0,0,0,0,0,categoria
+Jolof Sharing Pack (Plain),Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Jolof with Beef,Main courses,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,0.3657,0.0000,0.8819,0,0,0,0,0,0,categoria
+Jolof with Chicken,Main courses,modelable,2026-01-05,0,0.0123,0,GradientBoosting,0.5000,0.0123,0.4317,0.4131,0.8645,0,0,0,0,0,0,categoria
+Jolof with Curry Goat,Main courses,modelable,2026-01-05,0,0.0008,0,GradientBoosting,0.7500,0.0008,0.0227,0.2861,0.5627,0,0,0,0,0,0,categoria
+Jolof with Fish,Main courses,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0223,0.0000,0.6048,0,0,0,0,0,0,categoria
+Malta Guinness,Drinks,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,0.0108,0.0000,0.1247,0,0,0,0,0,0,categoria
+Maltina,Drinks,modelable,2026-01-05,0,0.0004,0,GradientBoosting,0.7500,0.0004,0.0347,0.6651,0.2105,0,0,0,0,0,0,categoria
+Meat Pie,Apetisers,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,0.0323,0.3979,0.7737,0,0,0,0,0,0,plato
+Moi Moi - Beans Pudding,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,1.0691,0.3429,1.6485,0,0,0,0,0,0,plato
+Nkwobi,Apetisers,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Ogbono,Soups,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0052,0.0000,0.0781,0,0,0,0,0,0,categoria
+Oha Soup,Soups,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Okro,Soups,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,0.0168,0.2681,0.2052,0,0,0,0,0,0,categoria
+Packs of Afang (Pre-order),Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Packs of Edikan-Ikong (Pre-order),Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Packs of Efo,Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Packs of Egusi,Restaurant deals,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Palm Wine,Drinks,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.0913,0,0,0,0,0,0,categoria
+Patty,Apetisers,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0088,0.0000,0.2779,0,0,0,0,0,0,categoria
+Peppered Turkey,Apetisers,historial_insuficiente,2026-01-05,0,0.0000,0,media_movil,,,,,,0,0,0,0,0,0,categoria
+Plain Fried Rice,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0048,0.0000,0.0000,0,0,0,0,0,0,categoria
+Plain Jolof,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.2500,0.0000,0.1899,0.0000,1.0907,0,0,0,0,0,0,categoria
+Plantain Chips,Apetisers,modelable,2026-01-05,1,0.0000,0,GradientBoosting,0.2500,0.0000,0.0108,0.3005,0.2694,0,0,0,0,0,0,categoria
+Pounded Yam,Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.2892,0.0000,0.9809,0,0,0,0,0,0,plato
+Semolina (Maize Flour),Extras,modelable,2026-01-05,0,0.0000,0,GradientBoosting,0.0000,0.0000,0.0107,0.0000,0.1455,0,0,0,0,0,0,categoria
+Sphagetti Meatballs,Main courses,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,
+Stewed Fried Fish,Extras,retirado,2026-01-05,0,,,ninguno,,,,,,,,,,,,

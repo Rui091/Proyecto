@@ -1,0 +1,236 @@
+modelo,combinacion,hiperparametros,semilla,mae_validacion,rmse_validacion,smape_validacion,accuracy_validacion,precision_validacion,recall_validacion,f1_validacion,mejor_del_modelo,vigente
+MM4,1,promedio de u_t1 a u_t4,,0.6205,1.0287,107.1110,0.6465,0.4440,0.6775,0.5365,sí,no
+GradientBoosting,1,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=167,42,0.5132,1.0092,84.3212,0.7430,0.6267,0.3686,0.4642,no,no
+GradientBoosting,2,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=141,42,0.5130,1.0104,84.3115,0.7430,0.6267,0.3686,0.4642,no,no
+GradientBoosting,3,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=51,42,0.5240,1.0788,84.8831,0.7250,0.6154,0.2385,0.3438,no,no
+GradientBoosting,4,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=51,42,0.5240,1.0788,84.8831,0.7250,0.6154,0.2385,0.3438,no,no
+GradientBoosting,5,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=129,42,0.5126,0.9978,86.6422,0.7471,0.6145,0.4363,0.5103,no,no
+GradientBoosting,6,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=172,42,0.5108,0.9927,82.6999,0.7414,0.5985,0.4363,0.5047,no,no
+GradientBoosting,7,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=48,42,0.5251,1.0647,82.2014,0.7300,0.6066,0.3008,0.4022,no,no
+GradientBoosting,8,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=47,42,0.5251,1.0664,82.2813,0.7300,0.6066,0.3008,0.4022,no,no
+GradientBoosting,9,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=80,42,0.5113,1.0043,87.5000,0.7439,0.6176,0.3984,0.4843,no,no
+GradientBoosting,10,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=51,42,0.5084,1.0076,88.4477,0.7447,0.6203,0.3984,0.4851,no,no
+GradientBoosting,11,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=41,42,0.5250,1.0735,83.7974,0.7234,0.5975,0.2575,0.3598,no,no
+GradientBoosting,12,l2_regularization=0.0; learning_rate=0.03; loss=absolute_error; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=32,42,0.5260,1.0824,84.5689,0.7242,0.6000,0.2602,0.3629,no,no
+GradientBoosting,13,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=2,42,0.6754,0.9852,160.6190,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,14,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=2,42,0.6754,0.9852,160.6194,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,15,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6762,0.9867,160.6439,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,16,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6763,0.9867,160.6458,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,17,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6762,0.9865,160.6272,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,18,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6762,0.9864,160.6385,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,19,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6764,0.9868,160.6344,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,20,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6764,0.9867,160.6348,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,21,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6766,0.9871,160.6049,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,22,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6763,0.9871,160.6528,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,23,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6766,0.9869,160.6089,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,24,l2_regularization=0.0; learning_rate=0.03; loss=squared_error; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6764,0.9867,160.6402,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,25,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=2,42,0.6754,0.9851,160.6121,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,26,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=2,42,0.6754,0.9852,160.6143,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,27,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6762,0.9866,160.6404,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,28,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6763,0.9867,160.6435,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,29,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6762,0.9864,160.6212,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,30,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6762,0.9864,160.6354,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,31,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6764,0.9868,160.6297,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,32,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6765,0.9867,160.6317,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,33,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6766,0.9871,160.5965,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,34,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6763,0.9871,160.6499,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,35,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6766,0.9868,160.5979,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,36,l2_regularization=0.0; learning_rate=0.03; loss=poisson; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6764,0.9867,160.6364,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,37,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=57,42,0.5132,1.0003,85.1662,0.7430,0.6233,0.3767,0.4696,no,no
+GradientBoosting,38,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=58,42,0.5130,1.0002,85.0343,0.7439,0.6250,0.3794,0.4722,no,no
+GradientBoosting,39,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=15,42,0.5242,1.0774,84.6038,0.7250,0.6154,0.2385,0.3438,no,no
+GradientBoosting,40,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=15,42,0.5242,1.0774,84.6038,0.7250,0.6154,0.2385,0.3438,no,no
+GradientBoosting,41,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=38,42,0.5073,0.9849,95.1955,0.7455,0.6133,0.4255,0.5024,no,no
+GradientBoosting,42,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=43,42,0.5084,0.9861,97.3445,0.7455,0.6169,0.4146,0.4959,no,no
+GradientBoosting,43,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=14,42,0.5254,1.0649,82.3526,0.7300,0.6066,0.3008,0.4022,no,no
+GradientBoosting,44,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=14,42,0.5253,1.0661,82.3696,0.7300,0.6066,0.3008,0.4022,no,no
+GradientBoosting,45,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=28,42,0.5113,0.9883,98.8338,0.7504,0.6270,0.4282,0.5089,no,no
+GradientBoosting,46,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=15,42,0.5135,1.0262,93.1963,0.7406,0.6102,0.3902,0.4760,no,no
+GradientBoosting,47,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=12,42,0.5254,1.0730,83.7508,0.7242,0.6013,0.2575,0.3605,no,no
+GradientBoosting,48,l2_regularization=0.0; learning_rate=0.1; loss=absolute_error; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=10,42,0.5258,1.0794,84.2567,0.7234,0.5963,0.2602,0.3623,no,no
+GradientBoosting,49,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=2,42,0.6713,0.9781,160.5584,0.6579,0.4562,0.6911,0.5496,no,no
+GradientBoosting,50,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=2,42,0.6714,0.9781,160.5594,0.6579,0.4562,0.6911,0.5496,no,no
+GradientBoosting,51,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6736,0.9824,160.6026,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,52,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6737,0.9824,160.6077,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,53,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6736,0.9819,160.5527,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,54,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6735,0.9817,160.5868,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,55,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6742,0.9829,160.5780,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,56,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6743,0.9827,160.5777,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,57,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6748,0.9842,160.4769,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,58,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6738,0.9839,160.6330,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,59,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6749,0.9832,160.5037,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,60,l2_regularization=0.0; learning_rate=0.1; loss=squared_error; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6741,0.9825,160.5991,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,61,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6735,0.9816,160.5447,0.6596,0.4578,0.6911,0.5508,no,no
+GradientBoosting,62,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6738,0.9821,160.5606,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,63,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6736,0.9823,160.5616,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,64,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6739,0.9824,160.5811,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,65,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6737,0.9815,160.4809,0.6588,0.4570,0.6911,0.5502,no,no
+GradientBoosting,66,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=2,42,0.6698,0.9763,160.5455,0.6579,0.4562,0.6911,0.5496,no,no
+GradientBoosting,67,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6743,0.9829,160.5222,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,68,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6746,0.9827,160.5411,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,69,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6752,0.9843,160.3768,0.6579,0.4562,0.6911,0.5496,no,no
+GradientBoosting,70,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6741,0.9838,160.5988,0.6579,0.4562,0.6911,0.5496,no,no
+GradientBoosting,71,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6749,0.9831,160.3716,0.6588,0.4571,0.6938,0.5511,no,no
+GradientBoosting,72,l2_regularization=0.0; learning_rate=0.1; loss=poisson; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6744,0.9824,160.5553,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,73,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,74,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,75,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,76,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,77,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,78,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,79,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,80,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,81,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,82,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,83,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,84,l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,85,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=2,42,0.6754,0.9852,160.6213,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,86,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=2,42,0.6754,0.9852,160.6205,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,87,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6762,0.9867,160.6457,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,88,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6763,0.9867,160.6463,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,89,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6763,0.9865,160.6278,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,90,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6762,0.9864,160.6391,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,91,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6764,0.9868,160.6328,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,92,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6764,0.9867,160.6318,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,93,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6764,0.9861,160.6176,0.6571,0.4547,0.6802,0.5451,no,no
+GradientBoosting,94,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6763,0.9871,160.6538,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,95,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6765,0.9869,160.6263,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,96,l2_regularization=1.0; learning_rate=0.03; loss=squared_error; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6765,0.9867,160.6404,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,97,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=2,42,0.6754,0.9852,160.6150,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,98,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=2,42,0.6754,0.9852,160.6154,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,99,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6762,0.9867,160.6428,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,100,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6763,0.9867,160.6441,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,101,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6763,0.9865,160.6224,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,102,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6762,0.9864,160.6361,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,103,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6764,0.9868,160.6288,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,104,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6765,0.9867,160.6288,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,105,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6764,0.9860,160.6205,0.6571,0.4547,0.6802,0.5451,no,no
+GradientBoosting,106,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6763,0.9871,160.6510,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,107,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6765,0.9869,160.6178,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,108,l2_regularization=1.0; learning_rate=0.03; loss=poisson; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6765,0.9867,160.6368,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,109,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,110,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=307,42,0.5047,1.0043,62.4780,0.7512,0.6395,0.4038,0.4950,no,no
+GradientBoosting,111,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,112,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,113,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,114,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=139,42,0.5022,0.9855,60.6762,0.7520,0.6341,0.4228,0.5073,sí,sí
+GradientBoosting,115,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,116,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,117,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,118,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,119,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,120,l2_regularization=1.0; learning_rate=0.1; loss=absolute_error; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.5524,1.2100,60.3928,0.6980,0.0000,0.0000,0.0000,no,no
+GradientBoosting,121,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=2,42,0.6713,0.9782,160.5650,0.6571,0.4552,0.6883,0.5480,no,no
+GradientBoosting,122,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=2,42,0.6714,0.9781,160.5623,0.6579,0.4562,0.6911,0.5496,no,no
+GradientBoosting,123,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6736,0.9824,160.6077,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,124,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6737,0.9824,160.6093,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,125,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6739,0.9820,160.5540,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,126,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6735,0.9817,160.5890,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,127,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6743,0.9828,160.5776,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,128,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6744,0.9826,160.5733,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,129,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6741,0.9809,160.5179,0.6571,0.4547,0.6802,0.5451,no,no
+GradientBoosting,130,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6738,0.9838,160.6363,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,131,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6745,0.9834,160.5615,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,132,l2_regularization=1.0; learning_rate=0.1; loss=squared_error; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6745,0.9827,160.6050,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,133,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=3; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6735,0.9817,160.5545,0.6596,0.4578,0.6911,0.5508,no,no
+GradientBoosting,134,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=3; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6738,0.9821,160.5621,0.6588,0.4568,0.6883,0.5492,no,no
+GradientBoosting,135,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=3; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6737,0.9823,160.5745,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,136,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=3; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6739,0.9824,160.5837,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,137,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=4; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6740,0.9817,160.4902,0.6588,0.4570,0.6911,0.5502,no,no
+GradientBoosting,138,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=4; max_features=0.8; min_samples_leaf=20; max_iter=2,42,0.6700,0.9764,160.5471,0.6579,0.4562,0.6911,0.5496,no,no
+GradientBoosting,139,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=4; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6744,0.9828,160.5306,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,140,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=4; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6746,0.9826,160.5381,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,141,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=6; max_features=0.8; min_samples_leaf=5; max_iter=1,42,0.6743,0.9805,160.4894,0.6538,0.4516,0.6829,0.5437,no,no
+GradientBoosting,142,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=1,42,0.6740,0.9838,160.6035,0.6579,0.4562,0.6911,0.5496,no,no
+GradientBoosting,143,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=6; max_features=1.0; min_samples_leaf=5; max_iter=1,42,0.6746,0.9832,160.4622,0.6579,0.4560,0.6883,0.5486,no,no
+GradientBoosting,144,l2_regularization=1.0; learning_rate=0.1; loss=poisson; max_depth=6; max_features=1.0; min_samples_leaf=20; max_iter=1,42,0.6748,0.9827,160.5628,0.6579,0.4560,0.6883,0.5486,no,no
+LSTM,1,batch_size=32; capas=1; dropout=0.1; learning_rate=0.001; unidades=16; epocas=5,42,0.5246,0.9844,142.3081,0.7455,0.6000,0.4715,0.5281,no,no
+LSTM,2,batch_size=32; capas=1; dropout=0.1; learning_rate=0.001; unidades=32; epocas=4,42,0.5261,0.9781,154.1005,0.7447,0.5941,0.4878,0.5357,no,no
+LSTM,3,batch_size=32; capas=1; dropout=0.1; learning_rate=0.01; unidades=16; epocas=1,42,0.5218,0.9939,150.1550,0.7439,0.6085,0.4255,0.5008,no,no
+LSTM,4,batch_size=32; capas=1; dropout=0.1; learning_rate=0.01; unidades=32; epocas=5,42,0.5275,0.9794,173.9985,0.7488,0.6047,0.4851,0.5383,no,no
+LSTM,5,batch_size=32; capas=1; dropout=0.3; learning_rate=0.001; unidades=16; epocas=6,42,0.5219,0.9835,136.1364,0.7447,0.5986,0.4688,0.5258,no,no
+LSTM,6,batch_size=32; capas=1; dropout=0.3; learning_rate=0.001; unidades=32; epocas=3,42,0.5239,0.9866,151.4273,0.7439,0.5972,0.4661,0.5236,no,no
+LSTM,7,batch_size=32; capas=1; dropout=0.3; learning_rate=0.01; unidades=16; epocas=2,42,0.5220,0.9964,162.6733,0.7406,0.6092,0.3930,0.4778,no,no
+LSTM,8,batch_size=32; capas=1; dropout=0.3; learning_rate=0.01; unidades=32; epocas=2,42,0.5223,0.9858,170.6718,0.7430,0.5958,0.4634,0.5213,no,no
+LSTM,9,batch_size=32; capas=2; dropout=0.1; learning_rate=0.001; unidades=16; epocas=2,42,0.5188,0.9945,146.5574,0.7471,0.6145,0.4363,0.5103,no,no
+LSTM,10,batch_size=32; capas=2; dropout=0.1; learning_rate=0.001; unidades=32; epocas=2,42,0.5236,0.9793,148.5725,0.7447,0.5953,0.4824,0.5329,no,no
+LSTM,11,batch_size=32; capas=2; dropout=0.1; learning_rate=0.01; unidades=16; epocas=4,42,0.5201,0.9707,94.9146,0.7447,0.5911,0.5014,0.5425,no,no
+LSTM,12,batch_size=32; capas=2; dropout=0.1; learning_rate=0.01; unidades=32; epocas=2,42,0.5185,0.9894,177.1524,0.7496,0.6154,0.4553,0.5234,no,no
+LSTM,13,batch_size=32; capas=2; dropout=0.3; learning_rate=0.001; unidades=16; epocas=3,42,0.5192,0.9923,155.5607,0.7471,0.6163,0.4309,0.5072,no,no
+LSTM,14,batch_size=32; capas=2; dropout=0.3; learning_rate=0.001; unidades=32; epocas=4,42,0.5224,0.9756,128.7201,0.7455,0.5948,0.4932,0.5393,no,no
+LSTM,15,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=16; epocas=5,42,0.5130,0.9775,71.2327,0.7455,0.6007,0.4688,0.5266,no,no
+LSTM,16,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=32; epocas=6,42,0.5143,0.9740,177.3874,0.7471,0.5980,0.4959,0.5422,no,no
+LSTM,17,batch_size=64; capas=1; dropout=0.1; learning_rate=0.001; unidades=16; epocas=11,42,0.5260,0.9773,154.6416,0.7480,0.6000,0.4959,0.5430,no,no
+LSTM,18,batch_size=64; capas=1; dropout=0.1; learning_rate=0.001; unidades=32; epocas=11,42,0.5285,0.9740,122.5091,0.7430,0.5862,0.5068,0.5436,no,no
+LSTM,19,batch_size=64; capas=1; dropout=0.1; learning_rate=0.01; unidades=16; epocas=2,42,0.5216,0.9884,124.1331,0.7455,0.6036,0.4580,0.5208,no,no
+LSTM,20,batch_size=64; capas=1; dropout=0.1; learning_rate=0.01; unidades=32; epocas=1,42,0.5202,0.9881,124.7516,0.7439,0.6053,0.4363,0.5071,no,no
+LSTM,21,batch_size=64; capas=1; dropout=0.3; learning_rate=0.001; unidades=16; epocas=9,42,0.5233,0.9837,159.8650,0.7463,0.6021,0.4715,0.5289,no,no
+LSTM,22,batch_size=64; capas=1; dropout=0.3; learning_rate=0.001; unidades=32; epocas=7,42,0.5267,0.9755,157.4107,0.7463,0.5961,0.4959,0.5414,no,no
+LSTM,23,batch_size=64; capas=1; dropout=0.3; learning_rate=0.01; unidades=16; epocas=1,42,0.5264,1.0027,162.0565,0.7471,0.6282,0.3984,0.4876,no,no
+LSTM,24,batch_size=64; capas=1; dropout=0.3; learning_rate=0.01; unidades=32; epocas=2,42,0.5183,0.9968,126.3126,0.7471,0.6181,0.4255,0.5040,no,no
+LSTM,25,batch_size=64; capas=2; dropout=0.1; learning_rate=0.001; unidades=16; epocas=5,42,0.5193,0.9821,151.6337,0.7471,0.6014,0.4824,0.5353,no,no
+LSTM,26,batch_size=64; capas=2; dropout=0.1; learning_rate=0.001; unidades=32; epocas=3,42,0.5232,0.9744,135.5708,0.7480,0.5987,0.5014,0.5457,no,no
+LSTM,27,batch_size=64; capas=2; dropout=0.1; learning_rate=0.01; unidades=16; epocas=9,42,0.5373,0.9886,175.7580,0.7463,0.5925,0.5122,0.5494,no,no
+LSTM,28,batch_size=64; capas=2; dropout=0.1; learning_rate=0.01; unidades=32; epocas=8,42,0.5277,0.9762,160.4008,0.7463,0.5942,0.5041,0.5455,no,no
+LSTM,29,batch_size=64; capas=2; dropout=0.3; learning_rate=0.001; unidades=16; epocas=8,42,0.5210,0.9796,134.8647,0.7471,0.6007,0.4851,0.5367,no,no
+LSTM,30,batch_size=64; capas=2; dropout=0.3; learning_rate=0.001; unidades=32; epocas=8,42,0.5252,0.9721,152.4933,0.7480,0.5987,0.5014,0.5457,no,no
+LSTM,31,batch_size=64; capas=2; dropout=0.3; learning_rate=0.01; unidades=16; epocas=7,42,0.5186,0.9725,173.6987,0.7447,0.5928,0.4932,0.5385,no,no
+LSTM,32,batch_size=64; capas=2; dropout=0.3; learning_rate=0.01; unidades=32; epocas=4,42,0.5193,0.9914,176.3687,0.7520,0.6320,0.4282,0.5105,no,no
+LSTM_semillas,15,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=16; epocas=21,43,0.5246,0.9847,177.5791,0.7390,0.5822,0.4797,0.5260,no,no
+LSTM_semillas,15,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=16; epocas=2,44,0.5281,0.9633,121.0792,0.7439,0.5886,0.5041,0.5431,no,no
+LSTM_semillas,15,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=16; epocas=11,45,0.5253,0.9801,75.5258,0.7430,0.5868,0.5041,0.5423,no,no
+LSTM_semillas,15,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=16; epocas=2,46,0.5142,0.9837,150.0168,0.7504,0.6119,0.4743,0.5344,no,no
+LSTM_promedio,15,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=16; epocas=8,,0.5210,0.9779,119.0867,0.7444,0.5940,0.4862,0.5345,sí,no
+LSTM_semillas,16,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=32; epocas=10,43,0.5183,0.9908,177.2512,0.7455,0.6000,0.4715,0.5281,no,no
+LSTM_semillas,16,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=32; epocas=10,44,0.5435,0.9905,174.3543,0.7398,0.5766,0.5203,0.5470,no,no
+LSTM_semillas,16,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=32; epocas=12,45,0.5317,0.9777,175.4563,0.7406,0.5774,0.5257,0.5504,no,no
+LSTM_semillas,16,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=32; epocas=3,46,0.5123,0.9793,84.7131,0.7471,0.6027,0.4770,0.5325,no,no
+LSTM_promedio,16,batch_size=32; capas=2; dropout=0.3; learning_rate=0.01; unidades=32; epocas=8,,0.5240,0.9824,157.8325,0.7440,0.5909,0.4981,0.5400,no,no
+LSTM_semillas,24,batch_size=64; capas=1; dropout=0.3; learning_rate=0.01; unidades=32; epocas=3,43,0.5243,0.9709,165.2631,0.7447,0.5960,0.4797,0.5315,no,no
+LSTM_semillas,24,batch_size=64; capas=1; dropout=0.3; learning_rate=0.01; unidades=32; epocas=8,44,0.5323,0.9684,174.9742,0.7447,0.5899,0.5068,0.5452,no,no
+LSTM_semillas,24,batch_size=64; capas=1; dropout=0.3; learning_rate=0.01; unidades=32; epocas=2,45,0.5188,0.9951,156.9769,0.7455,0.6189,0.4092,0.4927,no,no
+LSTM_semillas,24,batch_size=64; capas=1; dropout=0.3; learning_rate=0.01; unidades=32; epocas=2,46,0.5242,0.9776,128.2098,0.7463,0.5967,0.4932,0.5401,no,no
+LSTM_promedio,24,batch_size=64; capas=1; dropout=0.3; learning_rate=0.01; unidades=32; epocas=3,,0.5236,0.9818,150.3473,0.7457,0.6039,0.4629,0.5227,no,no
+ARIMA,1,"estacional=(0, 0, 0, 0); orden=(0, 0, 0); fallas=0",,1.1313,1.6048,159.9795,0.5098,0.3618,0.8157,0.5012,no,no
+ARIMA,2,"estacional=(0, 0, 0, 0); orden=(0, 0, 1); fallas=0",,1.0798,1.5216,159.7571,0.5196,0.3634,0.7859,0.4970,no,no
+ARIMA,3,"estacional=(0, 0, 0, 0); orden=(0, 0, 2); fallas=0",,1.0341,1.4520,159.6428,0.5352,0.3729,0.7913,0.5069,no,no
+ARIMA,4,"estacional=(0, 0, 0, 0); orden=(0, 1, 0); fallas=0",,0.6980,1.2681,82.3769,0.6596,0.4383,0.4526,0.4453,no,no
+ARIMA,5,"estacional=(0, 0, 0, 0); orden=(0, 1, 1); fallas=0",,0.6879,1.0224,161.7560,0.6678,0.4635,0.6369,0.5365,no,no
+ARIMA,6,"estacional=(0, 0, 0, 0); orden=(0, 1, 2); fallas=0",,0.6884,1.0289,161.7590,0.6694,0.4655,0.6396,0.5388,no,no
+ARIMA,7,"estacional=(0, 0, 0, 0); orden=(1, 0, 0); fallas=0",,1.0589,1.4880,159.6092,0.5196,0.3634,0.7859,0.4970,no,no
+ARIMA,8,"estacional=(0, 0, 0, 0); orden=(1, 0, 1); fallas=0",,0.8330,1.1640,158.6471,0.5720,0.3939,0.7751,0.5224,no,no
+ARIMA,9,"estacional=(0, 0, 0, 0); orden=(1, 0, 2); fallas=0",,0.8794,1.2605,159.2652,0.5941,0.4081,0.7642,0.5321,no,no
+ARIMA,10,"estacional=(0, 0, 0, 0); orden=(1, 1, 0); fallas=0",,0.6577,1.1367,130.1384,0.6596,0.4479,0.5474,0.4927,no,no
+ARIMA,11,"estacional=(0, 0, 0, 0); orden=(1, 1, 1); fallas=0",,0.6902,1.0340,161.7926,0.6678,0.4635,0.6369,0.5365,no,no
+ARIMA,12,"estacional=(0, 0, 0, 0); orden=(1, 1, 2); fallas=0",,0.6839,1.0259,161.5467,0.6759,0.4729,0.6396,0.5438,no,no
+ARIMA,13,"estacional=(0, 0, 0, 0); orden=(2, 0, 0); fallas=0",,0.9942,1.3870,159.1558,0.5336,0.3716,0.7886,0.5052,no,no
+ARIMA,14,"estacional=(0, 0, 0, 0); orden=(2, 0, 1); fallas=0",,0.8672,1.2299,158.8259,0.5851,0.4017,0.7642,0.5266,no,no
+ARIMA,15,"estacional=(0, 0, 0, 0); orden=(2, 0, 2); fallas=0",,0.8252,1.1582,158.8536,0.6023,0.4131,0.7534,0.5336,no,no
+ARIMA,16,"estacional=(0, 0, 0, 0); orden=(2, 1, 0); fallas=0",,0.6211,1.0566,142.2397,0.6809,0.4765,0.5772,0.5221,sí,no
+ARIMA,17,"estacional=(0, 0, 0, 0); orden=(2, 1, 1); fallas=0",,0.7152,1.0999,161.3318,0.6751,0.4715,0.6287,0.5389,no,no
+ARIMA,18,"estacional=(0, 0, 0, 0); orden=(2, 1, 2); fallas=0",,0.6942,1.0347,161.9715,0.6702,0.4665,0.6423,0.5405,no,no
+SARIMA,1,"estacional=(1, 0, 0, 4); orden=(1, 0, 0); fallas=0",,1.0302,1.4435,159.7141,0.5065,0.3563,0.7859,0.4903,no,no
+SARIMA,2,"estacional=(1, 0, 0, 4); orden=(1, 0, 1); fallas=0",,0.8475,1.1790,159.4464,0.5876,0.4017,0.7480,0.5227,no,no
+SARIMA,3,"estacional=(1, 0, 0, 4); orden=(0, 1, 1); fallas=0",,0.6962,1.0354,162.0962,0.6604,0.4545,0.6233,0.5257,no,no
+SARIMA,4,"estacional=(1, 0, 0, 13); orden=(1, 0, 0); fallas=0",,1.0291,1.4448,159.3524,0.5139,0.3646,0.8211,0.5050,no,no
+SARIMA,5,"estacional=(1, 0, 0, 13); orden=(1, 0, 1); fallas=0",,0.8630,1.1988,158.9367,0.5736,0.3976,0.7995,0.5311,no,no
+SARIMA,6,"estacional=(1, 0, 0, 13); orden=(0, 1, 1); fallas=0",,0.6906,1.0269,161.9207,0.6620,0.4583,0.6558,0.5396,no,no
+SARIMA,7,"estacional=(0, 0, 1, 4); orden=(1, 0, 0); fallas=0",,1.0427,1.4735,159.8145,0.5049,0.3543,0.7778,0.4869,no,no
+SARIMA,8,"estacional=(0, 0, 1, 4); orden=(1, 0, 1); fallas=0",,0.8553,1.2089,159.5018,0.5900,0.4027,0.7398,0.5215,no,no
+SARIMA,9,"estacional=(0, 0, 1, 4); orden=(0, 1, 1); fallas=0",,0.6992,1.0540,161.9850,0.6628,0.4569,0.6179,0.5253,no,no
+SARIMA,10,"estacional=(0, 0, 1, 13); orden=(1, 0, 0); fallas=0",,1.0360,1.4555,159.3884,0.5106,0.3615,0.8103,0.5000,no,no
+SARIMA,11,"estacional=(0, 0, 1, 13); orden=(1, 0, 1); fallas=0",,0.8297,1.1552,158.5170,0.5712,0.3948,0.7886,0.5262,no,no
+SARIMA,12,"estacional=(0, 0, 1, 13); orden=(0, 1, 1); fallas=0",,0.6905,1.0276,161.8466,0.6620,0.4582,0.6531,0.5385,no,no
+SARIMA,13,"estacional=(0, 1, 1, 4); orden=(1, 0, 0); fallas=0",,0.7993,1.1387,159.5968,0.6064,0.4159,0.7507,0.5353,no,no
+SARIMA,14,"estacional=(0, 1, 1, 4); orden=(1, 0, 1); fallas=0",,0.7730,1.1100,160.3933,0.6391,0.4398,0.7127,0.5440,no,no
+SARIMA,15,"estacional=(0, 1, 1, 4); orden=(0, 1, 1); fallas=0",,0.6373,0.9902,154.2072,0.6997,0.5022,0.6179,0.5541,sí,no
+SARIMA,16,"estacional=(0, 1, 1, 13); orden=(1, 0, 0); fallas=0",,0.9227,1.3467,158.9380,0.5524,0.3784,0.7507,0.5032,no,no
+SARIMA,17,"estacional=(0, 1, 1, 13); orden=(1, 0, 1); fallas=0",,0.8179,1.1957,156.9689,0.5974,0.4064,0.7236,0.5205,no,no
+SARIMA,18,"estacional=(0, 1, 1, 13); orden=(0, 1, 1); fallas=0",,0.6708,1.0979,145.9760,0.6792,0.4758,0.6125,0.5355,no,no
+LSTM_escalado,,variable=ur; minimo=0.0000; maximo=6.8966,,,,,,,,,no,no
+LSTM_escalado,,variable=precio; minimo=0.7500; maximo=32.5000,,,,,,,,,no,no
+LSTM_escalado,,variable=sin; minimo=-1.0000; maximo=1.0000,,,,,,,,,no,no
+LSTM_escalado,,variable=cos; minimo=-1.0000; maximo=1.0000,,,,,,,,,no,no
+LSTM_escalado,,variable=nivel; minimo=0.1000; maximo=11.1000,,,,,,,,,no,no
+LSTM_escalado,,variable=tendencia; minimo=-3.3156; maximo=1.3073,,,,,,,,,no,no
+nivel,,nivel = media de u_t1 a u_t8 + 0.1; prediccion = salida del modelo x nivel,,,,,,,,,no,no

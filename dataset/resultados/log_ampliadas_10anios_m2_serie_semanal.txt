@@ -1,0 +1,28 @@
+M2 Serie de tiempo semanal
+<class 'pandas.DataFrame'>
+RangeIndex: 18905 entries, 0 to 18904
+Data columns (total 11 columns):
+ #   Column           Non-Null Count  Dtype  
+---  ------           --------------  -----  
+ 0   id_pedido        18905 non-null  str    
+ 1   fecha            18905 non-null  str    
+ 2   dia_semana       18905 non-null  str    
+ 3   hora             18905 non-null  str    
+ 4   plato            18905 non-null  str    
+ 5   categoria        18905 non-null  str    
+ 6   cantidad         18905 non-null  int64  
+ 7   precio_unitario  18905 non-null  float64
+ 8   ventas_brutas    18905 non-null  float64
+ 9   costo            18905 non-null  float64
+ 10  margen           18905 non-null  float64
+dtypes: float64(4), int64(1), str(6)
+memory usage: 1.6 MB
+62 platos x 522 semanas (2016-06-27 a 2026-06-22)
+A1: 2 semanas sin ninguna venta: 2025-06-30, 2025-09-08
+A2: semanas con ventas: 34.8% de la rejilla, 40.3% de las semanas activas
+unidades     31388.00
+ventas      165742.00
+costo        57982.65
+margen      107759.35
+dtype: float64
+32364 filas, 62 platos -> ../../dataset/processed/02_serie_semanal.csv

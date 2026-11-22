@@ -1,0 +1,21 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795036068.381466    2176 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795036070.894365    2176 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+M7 Validación cruzada de series de tiempo
+Variante: peso=None, ventana=None, tendencia=False -> archivos con sufijo "_prueba"
+Ganadores de M4: GB {'l2_regularization': 1.0, 'learning_rate': 0.03, 'loss': 'absolute_error', 'max_depth': 6, 'max_features': 0.8, 'min_samples_leaf': 20, 'max_iter': 124}; LSTM {'batch_size': 64, 'capas': 2, 'dropout': 0.3, 'learning_rate': 0.001, 'unidades': 16} x 32 épocas; ARIMA (2, 1, 0); SARIMA (0, 1, 1)(0, 1, 1, 4)
+149 semanas objetivo: 1 folds de 26 semanas
+Fold 1: prueba 2025-07-07 a 2025-12-29 (1222 filas); entrenamiento 5596 filas desde 2023-02-27
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+  ARIMA: 0 filas con MM4 por falta de parámetros
+  SARIMA: 0 filas con MM4 por falta de parámetros
+                  mae_mean  mae_std  rmse_mean  rmse_std  smape_mean  smape_std  recall_mean  recall_std  f1_mean  f1_std  sesgo_mean  sesgo_std  folds_que_supera_mm4
+modelo                                                                                                                                                                
+GradientBoosting    0.3502      NaN     0.8789       NaN     44.5595        NaN       0.1349         NaN   0.2166     NaN    -86.4647        NaN                     1
+Siempre 0           0.3535      NaN     0.9199       NaN     41.2439        NaN       0.0000         NaN   0.0000     NaN   -100.0000        NaN                     1
+LSTM                0.3718      NaN     0.8064       NaN    147.9216        NaN       0.4048         NaN   0.4484     NaN    -45.3752        NaN                     1
+SARIMA              0.4677      NaN     0.8229       NaN    143.0200        NaN       0.4802         NaN   0.4515     NaN     -3.0787        NaN                     1
+MM4                 0.4714      NaN     0.8493       NaN     95.2965        NaN       0.5714         NaN   0.4638     NaN      4.0509        NaN                     0
+ARIMA               0.4735      NaN     0.8887       NaN    145.2110        NaN       0.4722         NaN   0.4407     NaN      2.9809        NaN                     0
+6 filas -> ../../dataset/processed/07_validacion_cruzada_prueba.csv; resumen -> ../../dataset/processed/07_resumen_cv_prueba.csv

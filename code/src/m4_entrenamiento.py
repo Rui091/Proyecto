@@ -18,8 +18,9 @@ Pasos:
      calcular el nivel reciente de cada fila, la media de sus 8 semanas anteriores.
   3. MM4: medir el error de la media móvil en validación, como referencia.
   4. Gradient boosting (HistGradientBoostingRegressor): grid search de 144 combinaciones con parada temprana, prediciendo las ventas
-     relativas al nivel reciente.
+     relativas al nivel reciente. Entre sus variables está la tendencia de M3.
   5. LSTM: escalar a 0-1 con entrenamiento y grid search de 32 combinaciones con parada temprana.
+     La tendencia de M3 entra como variable fija, igual que el nivel.
      Las 3 mejores se repiten con 5 semillas y se comparan por su promedio.
   6. ARIMA y SARIMA (statsmodels): una serie por plato, sin ventanas. Grid search de 18 combinaciones cada uno.
   7. Selección: el menor MAE en validación gana en cada modelo, y entre GradientBoosting y LSTM.
@@ -64,6 +65,9 @@ MEJORES_LSTM = 3
 # 'ur' son las unidades relativas al nivel reciente del plato.
 HISTORIA_LSTM = 8
 VARIABLES_LSTM = ['ur', 'precio', 'sin', 'cos']
+# Variables de la LSTM que no cambian en la ventana: se repiten en los 8 pasos, junto con el plato 0/1.
+# La tendencia viene de M3: log((media de 8 semanas + 0,1) / (media de hasta 52 semanas + 0,1)).
+VARIABLES_FIJAS = ['nivel', 'tendencia']
 # Se suma al nivel para poder dividir cuando las 8 semanas anteriores fueron 0
 NIVEL_MINIMO = 0.1
 # Un pronóstico de 0,5 unidades o más cuenta como «predice venta»: redondeado da al menos 1 unidad.
@@ -161,7 +165,7 @@ def a_cubo(tabla, columnas_fijas):
     # Para cada variable se toman sus columnas de t-8 a t-1, así el paso 0 es la semana más antigua.
     pasos = np.stack([tabla[[f'{variable}_t{k}' for k in range(HISTORIA_LSTM, 0, -1)]].to_numpy()
                       for variable in VARIABLES_LSTM], axis=2)
-    # El plato y el nivel no cambian en la ventana: se repiten en los 8 pasos
+    # El plato, el nivel y la tendencia no cambian en la ventana: se repiten en los 8 pasos
     fijas = np.repeat(tabla[columnas_fijas].to_numpy()[:, np.newaxis, :], HISTORIA_LSTM, axis=1)
     return np.concatenate([pasos, fijas], axis=2).astype('float32')
 
@@ -271,7 +275,7 @@ nivel = media_8 + NIVEL_MINIMO
 y_relativa = mm4['y_real'] / nivel
 
 # Variables de GradientBoosting: todas las columnas que no son las comunes (u_t1..u_t4, media_4, calendario,
-# precio, plato y categoría en 0/1), más la media de 8 semanas, para que el modelo conozca el nivel
+# precio, tendencia, plato y categoría en 0/1), más la media de 8 semanas, para que el modelo conozca el nivel
 ventanas_xgboost['media_8'] = media_8
 variables_gb = [columna for columna in ventanas_xgboost.columns if columna not in columnas_comunes]
 # S1: entradas (X) y salidas (y) de cada conjunto
@@ -335,7 +339,7 @@ print(f'GradientBoosting: {len(grilla_gb)} combinaciones probadas', flush=True)
 # L1: cada variable se escala a 0-1 con el mínimo y el máximo de 'entrenamiento', nunca de todo el
 #     histórico (si no, la LSTM sabría de antemano los valores de validación y prueba)
 # L2: la secuencia de cada fila es (8 semanas x variables). Las unidades entran relativas al nivel (N2),
-#     y el plato 0/1 y el nivel se repiten en cada semana
+#     y el plato 0/1, el nivel y la tendencia se repiten en cada semana
 # L3: se prueban 32 combinaciones con semilla 42; la parada temprana mira la pérdida de validación
 #     y se queda con los pesos de la mejor época. Esa época queda en el texto (epocas)
 # L4: las 3 mejores combinaciones se repiten con 5 semillas y compiten por su MAE promedio
@@ -351,23 +355,24 @@ for k in range(1, HISTORIA_LSTM + 1):
 lstm_escalada['nivel'] = nivel
 lstm_escalada['y_relativa'] = y_relativa
 
-# L1: mínimo y máximo de cada variable en entrenamiento (las 8 semanas juntas) y del nivel
+# L1: mínimo y máximo de cada variable en entrenamiento (las 8 semanas juntas), del nivel y de la tendencia
 escala = {}
 for variable in VARIABLES_LSTM:
     columnas = [f'{variable}_t{k}' for k in range(1, HISTORIA_LSTM + 1)]
     valores = lstm_escalada.loc[es_train, columnas].to_numpy()
     escala[variable] = (valores.min(), valores.max())
-escala['nivel'] = (lstm_escalada.loc[es_train, 'nivel'].min(), lstm_escalada.loc[es_train, 'nivel'].max())
+for variable in VARIABLES_FIJAS:
+    escala[variable] = (lstm_escalada.loc[es_train, variable].min(), lstm_escalada.loc[es_train, variable].max())
 
 # L1: cada variable pasa a 0-1. 'ur' también escala la salida, porque son las mismas unidades relativas.
 for variable, (minimo, maximo) in escala.items():
-    columnas = ['nivel'] if variable == 'nivel' else [f'{variable}_t{k}' for k in range(1, HISTORIA_LSTM + 1)]
+    columnas = [variable] if variable in VARIABLES_FIJAS else [f'{variable}_t{k}' for k in range(1, HISTORIA_LSTM + 1)]
     lstm_escalada[columnas] = (lstm_escalada[columnas] - minimo) / (maximo - minimo)
 minimo_ur, maximo_ur = escala['ur']
 lstm_escalada['y_escalada'] = (lstm_escalada['y_relativa'] - minimo_ur) / (maximo_ur - minimo_ur)
 
 # L2: los cubos de entrada y la salida escalada de cada conjunto
-columnas_fijas = columnas_plato + ['nivel']
+columnas_fijas = columnas_plato + VARIABLES_FIJAS
 X_train_lstm = a_cubo(lstm_escalada[es_train], columnas_fijas)
 X_validacion_lstm = a_cubo(lstm_escalada[es_validacion], columnas_fijas)
 y_train_lstm = lstm_escalada.loc[es_train, 'y_escalada'].to_numpy()
@@ -571,7 +576,7 @@ conteo = entrenamiento['modelo'].value_counts().to_dict()
 
 # C1: se probaron todas las combinaciones del diseño
 assert conteo == {'GradientBoosting': 144, 'LSTM': 32, 'LSTM_semillas': 12, 'LSTM_promedio': 3,
-                  'LSTM_escalado': 5, 'MM4': 1, 'nivel': 1, 'ARIMA': 18, 'SARIMA': 18}, f'Combinaciones probadas: {conteo}'
+                  'LSTM_escalado': 6, 'MM4': 1, 'nivel': 1, 'ARIMA': 18, 'SARIMA': 18}, f'Combinaciones probadas: {conteo}'
 # C2: las métricas existen y no son negativas en todas las filas de modelos
 filas_modelo = ~entrenamiento['modelo'].isin(['LSTM_escalado', 'nivel'])
 metricas_modelo = entrenamiento.loc[filas_modelo, ['mae_validacion', 'rmse_validacion', 'smape_validacion',

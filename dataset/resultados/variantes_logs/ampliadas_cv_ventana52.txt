@@ -1,0 +1,33 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795035191.235591   12464 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1795035193.413515   12464 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+M7 Validación cruzada de series de tiempo
+Variante: peso=None, ventana=52, tendencia=False -> archivos con sufijo "_ventana52"
+Ganadores de M4: GB {'l2_regularization': 0.0, 'learning_rate': 0.03, 'loss': 'absolute_error', 'max_depth': 4, 'max_features': 0.8, 'min_samples_leaf': 20, 'max_iter': 233}; LSTM {'batch_size': 32, 'capas': 2, 'dropout': 0.3, 'learning_rate': 0.01, 'unidades': 16} x 5 épocas; ARIMA (2, 1, 0); SARIMA (0, 1, 1)(0, 1, 1, 4)
+305 semanas objetivo: 5 folds de 26 semanas
+Fold 1: prueba 2025-07-07 a 2025-12-29 (1222 filas); entrenamiento 2442 filas desde 2024-07-08
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+  ARIMA: 0 filas con MM4 por falta de parámetros
+  SARIMA: 0 filas con MM4 por falta de parámetros
+Fold 2: prueba 2025-01-06 a 2025-06-30 (1222 filas); entrenamiento 2416 filas desde 2024-01-08
+  ARIMA: 0 filas con MM4 por falta de parámetros
+  SARIMA: 0 filas con MM4 por falta de parámetros
+Fold 3: prueba 2024-07-08 a 2024-12-30 (1220 filas); entrenamiento 2392 filas desde 2023-07-10
+  ARIMA: 24 filas con MM4 por falta de parámetros
+  SARIMA: 24 filas con MM4 por falta de parámetros
+Fold 4: prueba 2024-01-08 a 2024-07-01 (1196 filas); entrenamiento 2392 filas desde 2023-01-09
+  ARIMA: 0 filas con MM4 por falta de parámetros
+  SARIMA: 0 filas con MM4 por falta de parámetros
+Fold 5: prueba 2023-07-10 a 2024-01-01 (1196 filas); entrenamiento 2392 filas desde 2022-07-11
+  ARIMA: 0 filas con MM4 por falta de parámetros
+  SARIMA: 0 filas con MM4 por falta de parámetros
+                  mae_mean  mae_std  rmse_mean  rmse_std  smape_mean  smape_std  recall_mean  recall_std  f1_mean  f1_std  sesgo_mean  sesgo_std  folds_que_supera_mm4
+modelo                                                                                                                                                                
+GradientBoosting    0.6468   0.2340     1.2772    0.3417    103.9614    52.9347       0.4298      0.2537   0.4731  0.2704    -49.0633    29.0854                     5
+LSTM                0.6491   0.2280     1.2561    0.3621    154.0256    21.0430       0.4752      0.1375   0.5416  0.1175    -42.0272    18.0888                     5
+MM4                 0.7566   0.2277     1.2885    0.3670    106.8476     6.7195       0.7037      0.0941   0.5794  0.0844      3.5523     1.2378                     0
+Siempre 0           0.7638   0.3299     1.6343    0.5759     67.5237    18.9006       0.0000      0.0000   0.0000  0.0000   -100.0000     0.0000                     2
+SARIMA              0.7665   0.2360     1.2812    0.3812    135.2973     7.5352       0.6435      0.1148   0.5773  0.0963      4.7691     6.3376                     2
+ARIMA               0.7772   0.2428     1.3564    0.3931    139.6602     7.2650       0.6218      0.0903   0.5691  0.0824      2.8376     1.3031                     0
+30 filas -> ../../dataset/processed/07_validacion_cruzada_ventana52.csv; resumen -> ../../dataset/processed/07_resumen_cv_ventana52.csv

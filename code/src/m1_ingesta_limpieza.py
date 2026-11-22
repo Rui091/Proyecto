@@ -1,7 +1,8 @@
 """
 M1. Ingesta y limpieza de datos.
 
-Entrada: dataset/raw/ventas_originales.csv         (Kaggle, sin modificar)
+Entrada: dataset/raw/ventas_originales.csv         (Kaggle, sin modificar; por defecto)
+         dataset/raw/ventas_ampliadas.csv          (mismas columnas, más años; con el argumento 'ampliadas')
 Salida:  dataset/processed/01_ventas_limpias.csv   (una fila por línea de pedido válida)
 Especificación: pipeline/M1_ingesta_limpieza.md
 
@@ -17,9 +18,12 @@ Pasos:
 Si un control falla, el script se detiene con un AssertionError y no escribe la salida.
 
 Uso (desde code/src):
-  python3 m1_ingesta_limpieza.py
+  python3 m1_ingesta_limpieza.py              # ventas originales
+  python3 m1_ingesta_limpieza.py ampliadas    # ventas ampliadas (o una ruta a otro CSV con las mismas columnas)
+Después se ejecutan M2 a M6 sin cambios: no dependen del tamaño del dataset.
 """
 
+import sys
 import pandas as pd # type: ignore 
 
 def filtrar(df, condicion, descripcion):
@@ -34,7 +38,9 @@ def filtrar(df, condicion, descripcion):
 # ---------------------------------------------------------------------------
 
 # El script se ejecuta desde code/src, así que los datos están dos carpetas más arriba
-ruta_entrada = '../../dataset/raw/ventas_originales.csv'
+# Dataset a procesar: 'originales' (por defecto), 'ampliadas' o la ruta de un CSV con las mismas columnas
+dataset = sys.argv[1] if len(sys.argv) > 1 else 'originales'
+ruta_entrada = dataset if dataset.endswith('.csv') else f'../../dataset/raw/ventas_{dataset}.csv'
 ruta_salida = '../../dataset/processed/01_ventas_limpias.csv'
 
 df = pd.read_csv(ruta_entrada)

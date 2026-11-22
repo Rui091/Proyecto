@@ -1,0 +1,29 @@
+M3 Partición temporal y ventanas
+<class 'pandas.DataFrame'>
+RangeIndex: 30814 entries, 0 to 30813
+Data columns (total 9 columns):
+ #   Column           Non-Null Count  Dtype         
+---  ------           --------------  -----         
+ 0   semana_inicio    30814 non-null  datetime64[us]
+ 1   plato            30814 non-null  str           
+ 2   categoria        30814 non-null  str           
+ 3   unidades         30814 non-null  int64         
+ 4   ventas           30814 non-null  float64       
+ 5   costo            30814 non-null  float64       
+ 6   margen           30814 non-null  float64       
+ 7   precio_unitario  26400 non-null  float64       
+ 8   activo           30814 non-null  int64         
+dtypes: datetime64[us](1), float64(4), int64(2), str(2)
+memory usage: 2.1 MB
+A1: entrenamiento: 445 semanas, 2016-06-27 a 2024-12-30
+A1: validacion: 26 semanas, 2025-01-06 a 2025-06-30
+A1: prueba: 26 semanas, 2025-07-07 a 2025-12-29
+A2: estado de los platos: {'modelable': 47, 'historial_insuficiente': 8, 'retirado': 7}
+A2: fuera de los modelos: African Coke (retirado), Asun goat meat (historial_insuficiente), Beans Puree (Ewa Again) (historial_insuficiente), Bitterleaf soup (historial_insuficiente), Fried Rice (Sharing Pack Plain) (retirado), Fried Yam (historial_insuficiente), Goat Meat Peppersoup (historial_insuficiente), Jolof Sharing Pack (Plain) (retirado), Nkwobi (historial_insuficiente), Oha Soup (historial_insuficiente), Packs of Afang (Pre-order) (retirado), Packs of Edikan-Ikong (Pre-order) (retirado), Packs of Efo (retirado), Peppered Turkey (historial_insuficiente), Stewed Fried Fish (retirado)
+A3: 30814 filas de M2 -> 22467 filas con ventana completa
+               filas  unidades
+conjunto                      
+entrenamiento  20023     28499
+prueba          1222       432
+validacion      1222       675
+22467 filas, 47 platos -> ../../dataset/processed/03_ventanas_mm4.csv, ../../dataset/processed/03_ventanas_xgboost.csv, ../../dataset/processed/03_ventanas_lstm.csv
