@@ -47,7 +47,6 @@ import tensorflow as tf # type: ignore
 # Las mismas constantes de M4: si cambian allá, cambian aquí
 HISTORIA_LSTM = 8
 VARIABLES_LSTM = ['ur', 'precio', 'sin', 'cos']
-VARIABLES_FIJAS = ['nivel', 'tendencia']
 NIVEL_MINIMO = 0.1
 # Un pronóstico de 0,5 unidades o más cuenta como «predice venta»: redondeado da al menos 1 unidad
 UMBRAL_VENTA = 0.5
@@ -64,7 +63,7 @@ def a_cubo(tabla, columnas_fijas):
     # Igual que en M4: entrada de la LSTM con forma (muestras, 8 pasos, variables), de t-8 a t-1
     pasos = np.stack([tabla[[f'{variable}_t{k}' for k in range(HISTORIA_LSTM, 0, -1)]].to_numpy()
                       for variable in VARIABLES_LSTM], axis=2)
-    # El plato, el nivel y la tendencia no cambian en la ventana: se repiten en los 8 pasos
+    # El plato y el nivel no cambian en la ventana: se repiten en los 8 pasos
     fijas = np.repeat(tabla[columnas_fijas].to_numpy()[:, np.newaxis, :], HISTORIA_LSTM, axis=1)
     return np.concatenate([pasos, fijas], axis=2).astype('float32')
 
@@ -115,10 +114,9 @@ assert mm4['conjunto'].equals(ventanas_xgboost['conjunto']) and mm4['conjunto'].
     'Los archivos no tienen el mismo conjunto'
 # C4 sin vacíos en las ventanas
 assert ventanas_xgboost.notna().all().all() and ventanas_lstm.notna().all().all(), 'Hay valores vacíos'
-# C5 M4 dejó un solo modelo vigente y la escala de las 6 variables de la LSTM
+# C5 M4 dejó un solo modelo vigente y la escala de las 5 variables de la LSTM
 assert (entrenamiento['vigente'] == 'sí').sum() == 1, 'M4 debe dejar un solo modelo vigente'
-assert (entrenamiento['modelo'] == 'LSTM_escalado').sum() == 6, \
-    'Falta la escala de la LSTM en 04_entrenamiento.csv (¿M4 se corrió sin la tendencia?)'
+assert (entrenamiento['modelo'] == 'LSTM_escalado').sum() == 5, 'Falta la escala de la LSTM en 04_entrenamiento.csv'
 
 # ---------------------------------------------------------------------------
 # 2. Conjunto de prueba y nivel
@@ -147,7 +145,7 @@ predicciones = mm4.loc[es_prueba, columnas_comunes].reset_index(drop=True)
 # 3. Predicciones
 # Reglas de las predicciones
 # F1: MM4 pronostica el promedio de las 4 semanas anteriores
-# F2: el gradient boosting usa las mismas variables que en M4 (incluida la tendencia de M3), más media_8, y en el mismo orden
+# F2: el gradient boosting usa las mismas variables que en M4, más media_8, y en el mismo orden
 # F3: la LSTM usa la escala 0-1 que guardó M4 (filas LSTM_escalado), calculada con entrenamiento
 # F4: una predicción negativa se lleva a 0 unidades, como en M4
 # F5: ARIMA y SARIMA usan los parámetros que dejó M4 (reentrenados con entrenamiento + validación) y pronostican
@@ -172,19 +170,18 @@ for texto in entrenamiento.loc[entrenamiento['modelo'] == 'LSTM_escalado', 'hipe
     partes = dict(parte.split('=') for parte in texto.split('; '))
     escala[partes['variable']] = (float(partes['minimo']), float(partes['maximo']))
 
-# N2: unidades de cada semana de la ventana divididas por el nivel, y el nivel como variable.
-# La tendencia ya viene en el archivo de M3.
+# N2: unidades de cada semana de la ventana divididas por el nivel, y el nivel como variable
 lstm_escalada = ventanas_lstm[es_prueba].copy()
 for k in range(1, HISTORIA_LSTM + 1):
     lstm_escalada[f'ur_t{k}'] = lstm_escalada[f'u_t{k}'] / nivel_prueba
 lstm_escalada['nivel'] = nivel_prueba
 # F3: cada variable pasa a 0-1 con la escala de entrenamiento
 for variable, (minimo, maximo) in escala.items():
-    columnas = [variable] if variable in VARIABLES_FIJAS else [f'{variable}_t{k}' for k in range(1, HISTORIA_LSTM + 1)]
+    columnas = ['nivel'] if variable == 'nivel' else [f'{variable}_t{k}' for k in range(1, HISTORIA_LSTM + 1)]
     lstm_escalada[columnas] = (lstm_escalada[columnas] - minimo) / (maximo - minimo)
 
 columnas_plato = [columna for columna in ventanas_lstm.columns if columna.startswith('plato_')]
-X_prueba_lstm = a_cubo(lstm_escalada, columnas_plato + VARIABLES_FIJAS)
+X_prueba_lstm = a_cubo(lstm_escalada, columnas_plato + ['nivel'])
 # La salida sale de la escala 0-1, pasa a unidades relativas y luego a unidades (N2)
 minimo_ur, maximo_ur = escala['ur']
 relativa = modelo_lstm.predict(X_prueba_lstm, verbose=0).ravel() * (maximo_ur - minimo_ur) + minimo_ur

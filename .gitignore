@@ -3,3 +3,6 @@ code/venv
 dataset/raw/archive
 dataset/raw/archive.zip
 __pycache__/
+
+# Experimentos y corridas que no forman parte de los resultados publicados
+experimentos/

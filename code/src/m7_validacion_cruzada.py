@@ -3,9 +3,8 @@ M7. Validación cruzada de series de tiempo (origen móvil, «rolling origin»).
 
 Entrada: dataset/processed/03_ventanas_mm4.csv, 03_ventanas_xgboost.csv, 03_ventanas_lstm.csv (salida de M3)
          dataset/processed/04_entrenamiento.csv  (hiperparámetros ganadores de M4)
-Salida:  dataset/processed/07_validacion_cruzada<sufijo>.csv  (métricas de cada modelo en cada fold)
-         dataset/processed/07_resumen_cv<sufijo>.csv          (promedio y desviación de los folds)
-         El sufijo depende de la variante (vacío sin opciones; por ejemplo _peso52, _ventana104, _sintendencia).
+Salida:  dataset/processed/07_validacion_cruzada.csv  (métricas de cada modelo en cada fold)
+         dataset/processed/07_resumen_cv.csv          (promedio y desviación de los folds)
 
 Idea: en vez de medir los modelos en una sola prueba de 26 semanas, se mide en N_FOLDS bloques seguidos de
 26 semanas, de atrás hacia adelante. En cada fold el modelo se entrena SOLO con las semanas anteriores al
@@ -18,31 +17,14 @@ Los hiperparámetros son los ganadores de M4 y no se vuelven a buscar; solo se r
 Aviso: los hiperparámetros se eligieron con las semanas de validación de M4, que caen dentro de los folds
 más recientes; esos folds son algo optimistas. Los folds antiguos son los más honestos.
 
-Variantes para aprovechar mejor la historia antigua (se pueden combinar):
-  --peso V      Ponderación por antigüedad: cada fila de entrenamiento pesa 0,5^(antigüedad / V), con la
-                antigüedad en semanas contada desde el inicio del bloque de prueba. V es la vida media: cada
-                V semanas el peso se reduce a la mitad. Afecta a gradient boosting y LSTM (sample_weight).
-                ARIMA y SARIMA no aceptan pesos y quedan igual.
-  --ventana N   Ventana de entrenamiento: solo se entrena con las N semanas anteriores al bloque de prueba.
-                Afecta a todos los modelos entrenados (gradient boosting, LSTM, ARIMA y SARIMA).
-  --sin-tendencia  Quita la variable de tendencia, que desde M3 está en las ventanas de gradient boosting y de
-                la LSTM (log((media de 8 semanas + 0,1) / (media de hasta 52 semanas + 0,1)), solo con el pasado).
-                Sirve para medir cuánto aporta. Los hiperparámetros siguen siendo los de M4, que se buscaron CON
-                la tendencia. ARIMA y SARIMA no la usan y quedan igual.
-
 Uso (desde code/src, después de M4):
-  python3 m7_validacion_cruzada.py                     # folds de 26 semanas, hasta 5
-  python3 m7_validacion_cruzada.py 13                  # folds de 13 semanas (para datasets cortos)
-  python3 m7_validacion_cruzada.py --peso 52           # ponderación con vida media de un año
-  python3 m7_validacion_cruzada.py --ventana 104       # entrenar solo con los últimos 2 años
-  python3 m7_validacion_cruzada.py --sin-tendencia     # sin la variable de tendencia
-  python3 m7_validacion_cruzada.py --peso 52
-  python3 m7_validacion_cruzada.py 26 1 --peso 52      # sin validación cruzada: un solo corte (últimas 26 semanas)
+  python3 m7_validacion_cruzada.py              # folds de 26 semanas, hasta 5
+  python3 m7_validacion_cruzada.py 13           # folds de 13 semanas (para datasets cortos)
 """
 
 import os
+import sys
 import ast
-import argparse
 import warnings
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -56,19 +38,12 @@ import tensorflow as tf # type: ignore
 
 tf.config.experimental.enable_op_determinism()
 
-argumentos = argparse.ArgumentParser(description='M7 validación cruzada de series de tiempo')
-argumentos.add_argument('semanas_fold', nargs='?', type=int, default=26, help='semanas de cada fold (26)')
-argumentos.add_argument('max_folds', nargs='?', type=int, default=5, help='máximo de folds (5)')
-argumentos.add_argument('--peso', type=float, default=None, help='vida media en semanas de la ponderación')
-argumentos.add_argument('--ventana', type=int, default=None, help='semanas de la ventana de entrenamiento')
-argumentos.add_argument('--sin-tendencia', action='store_true', help='quita la variable de tendencia de M3')
-opciones = argumentos.parse_args()
-
 SEMILLA = 42
 SEMILLAS_LSTM = [42, 43, 44, 45, 46]
-# Semanas de cada fold y máximo de folds; si el dataset es corto se usan menos folds
-SEMANAS_FOLD = opciones.semanas_fold
-MAX_FOLDS = opciones.max_folds
+# Hasta 5 folds; si el dataset es corto se usan menos (los que quepan con el entrenamiento mínimo)
+# Semanas de cada fold (26 por defecto) y máximo de folds, opcionales por línea de comandos
+SEMANAS_FOLD = int(sys.argv[1]) if len(sys.argv) > 1 else 26
+MAX_FOLDS = int(sys.argv[2]) if len(sys.argv) > 2 else 5
 # Un fold necesita al menos un año de entrenamiento (igual que M3), para que cada semana del año aparezca
 # al menos una vez y la LSTM y el gradient boosting tengan con qué aprender
 SEMANAS_MIN_ENTRENAMIENTO = 52
@@ -76,29 +51,13 @@ HISTORIA_LSTM = 8
 VARIABLES_LSTM = ['ur', 'precio', 'sin', 'cos']
 NIVEL_MINIMO = 0.1
 UMBRAL_VENTA = 0.5
-assert opciones.peso is None or opciones.peso > 0, 'La vida media debe ser positiva'
-assert opciones.ventana is None or opciones.ventana >= SEMANAS_MIN_ENTRENAMIENTO, \
-    f'La ventana debe tener al menos {SEMANAS_MIN_ENTRENAMIENTO} semanas'
-
-# Sufijo de los archivos de salida, para no pisar los resultados de otras variantes
-sufijo = ''
-if SEMANAS_FOLD != 26:
-    sufijo += f'_{SEMANAS_FOLD}sem'
-if MAX_FOLDS == 1:
-    sufijo += '_prueba'
-if opciones.peso is not None:
-    sufijo += f'_peso{opciones.peso:g}'
-if opciones.ventana is not None:
-    sufijo += f'_ventana{opciones.ventana}'
-if opciones.sin_tendencia:
-    sufijo += '_sintendencia'
 
 ruta_mm4 = '../../dataset/processed/03_ventanas_mm4.csv'
 ruta_xgboost = '../../dataset/processed/03_ventanas_xgboost.csv'
 ruta_lstm = '../../dataset/processed/03_ventanas_lstm.csv'
 ruta_entrenamiento = '../../dataset/processed/04_entrenamiento.csv'
-ruta_salida = f'../../dataset/processed/07_validacion_cruzada{sufijo}.csv'
-ruta_resumen = f'../../dataset/processed/07_resumen_cv{sufijo}.csv'
+ruta_salida = '../../dataset/processed/07_validacion_cruzada.csv'
+ruta_resumen = '../../dataset/processed/07_resumen_cv.csv'
 
 
 def leer_valor(texto):
@@ -171,8 +130,6 @@ epocas_lstm = params_lstm.pop('epocas')
 params_arima = leer_hiperparametros(ganadores['ARIMA'])
 params_sarima = leer_hiperparametros(ganadores['SARIMA'])
 print('M7 Validación cruzada de series de tiempo')
-print(f'Variante: peso={opciones.peso}, ventana={opciones.ventana}, tendencia={not opciones.sin_tendencia} '
-      f'-> archivos con sufijo "{sufijo}"')
 print(f'Ganadores de M4: GB {params_gb}; LSTM {params_lstm} x {epocas_lstm} épocas; '
       f'ARIMA {params_arima["orden"]}; SARIMA {params_sarima["orden"]}{params_sarima["estacional"]}')
 
@@ -182,6 +139,7 @@ media_8 = lstm[[f'u_t{k}' for k in range(1, HISTORIA_LSTM + 1)]].mean(axis=1)
 nivel = (media_8 + NIVEL_MINIMO).to_numpy()
 y_relativa = (mm4['y_real'] / nivel).to_numpy()
 xgb['media_8'] = media_8
+variables_gb = [c for c in xgb.columns if c not in columnas_comunes]
 columnas_plato = [c for c in lstm.columns if c.startswith('plato_')]
 
 lstm_rel = lstm.copy()
@@ -190,24 +148,9 @@ for k in range(1, HISTORIA_LSTM + 1):
 lstm_rel['nivel'] = nivel
 lstm_rel['y_relativa'] = y_relativa
 
-# Tendencia: viene de M3 en las dos ventanas (gradient boosting y LSTM). Con --sin-tendencia se quita de ambas.
-assert 'tendencia' in xgb.columns and 'tendencia' in lstm.columns, 'Las ventanas de M3 no tienen la tendencia'
-columnas_fijas = columnas_plato + ['nivel', 'tendencia']
-if opciones.sin_tendencia:
-    xgb = xgb.drop(columns='tendencia')
-    columnas_fijas = columnas_plato + ['nivel']
-else:
-    tendencia = lstm_rel['tendencia'].to_numpy()
-    print(f'Tendencia: mediana {np.median(tendencia):.3f}, de {tendencia.min():.2f} a {tendencia.max():.2f}')
-
-variables_gb = [c for c in xgb.columns if c not in columnas_comunes]
-
 semanas = np.sort(mm4['semana_objetivo'].unique())
 N_FOLDS = min(MAX_FOLDS, (len(semanas) - SEMANAS_MIN_ENTRENAMIENTO) // SEMANAS_FOLD)
-# Con max_folds = 1 no hay validación cruzada: es un solo corte (las últimas semanas, el mismo bloque de M5)
-minimo_folds = 1 if MAX_FOLDS == 1 else 2
-assert N_FOLDS >= minimo_folds, \
-    f'Con {len(semanas)} semanas no caben {minimo_folds} folds de {SEMANAS_FOLD} con {SEMANAS_MIN_ENTRENAMIENTO} de entrenamiento'
+assert N_FOLDS >= 2, f'Con {len(semanas)} semanas no caben 2 folds de {SEMANAS_FOLD} con {SEMANAS_MIN_ENTRENAMIENTO} de entrenamiento'
 print(f'{len(semanas)} semanas objetivo: {N_FOLDS} folds de {SEMANAS_FOLD} semanas')
 
 resultados = []
@@ -218,35 +161,19 @@ resultados = []
 # V1: fold k prueba el bloque de 26 semanas que termina k-1 bloques antes de la última semana
 # V2: entrena con TODAS las filas cuya semana objetivo es anterior al bloque (las ventanas solo miran el pasado)
 # V3: la escala de la LSTM, los parámetros de ARIMA/SARIMA y los árboles se calculan solo con el entrenamiento del fold
-# V4 (--ventana): el entrenamiento se limita a las N semanas anteriores al bloque
-# V5 (--peso): cada fila de entrenamiento pesa 0,5^(antigüedad / vida media); los pesos se normalizan a media 1
 # ---------------------------------------------------------------------------
 
 for fold in range(1, N_FOLDS + 1):
     fin = len(semanas) - SEMANAS_FOLD * (fold - 1)
     semanas_prueba = semanas[fin - SEMANAS_FOLD:fin]
-    inicio_prueba = pd.Timestamp(semanas_prueba[0])
     es_prueba = mm4['semana_objetivo'].isin(semanas_prueba).to_numpy()
-    es_train = (mm4['semana_objetivo'] < inicio_prueba).to_numpy()
-    # V4: solo las N semanas anteriores al bloque de prueba
-    if opciones.ventana is not None:
-        es_train = es_train & (mm4['semana_objetivo'] >= inicio_prueba - pd.Timedelta(weeks=opciones.ventana)).to_numpy()
+    es_train = (mm4['semana_objetivo'] < semanas_prueba[0]).to_numpy()
     assert not (es_train & es_prueba).any() and es_train.any() and es_prueba.any()
     assert len(np.unique(mm4.loc[es_train, 'semana_objetivo'])) >= SEMANAS_MIN_ENTRENAMIENTO - HISTORIA_LSTM
     y_prueba = mm4.loc[es_prueba, 'y_real'].to_numpy()
     nivel_prueba = nivel[es_prueba]
-
-    # V5: pesos por antigüedad. Sin --peso, None (todas las filas pesan igual, como antes)
-    pesos = None
-    if opciones.peso is not None:
-        antiguedad = (inicio_prueba - mm4.loc[es_train, 'semana_objetivo']).dt.days.to_numpy() / 7
-        pesos = 0.5 ** (antiguedad / opciones.peso)
-        pesos = pesos / pesos.mean()
-
-    texto_pesos = '' if pesos is None else f'; peso de la fila más antigua {pesos.min() / pesos.max():.3f} de la más reciente'
-    print(f'Fold {fold}: prueba {inicio_prueba.date()} a {pd.Timestamp(semanas_prueba[-1]).date()} '
-          f'({es_prueba.sum()} filas); entrenamiento {es_train.sum()} filas desde '
-          f'{mm4.loc[es_train, "semana_objetivo"].min().date()}{texto_pesos}', flush=True)
+    print(f'Fold {fold}: prueba {pd.Timestamp(semanas_prueba[0]).date()} a {pd.Timestamp(semanas_prueba[-1]).date()} '
+          f'({es_prueba.sum()} filas); entrenamiento {es_train.sum()} filas', flush=True)
 
     preds = {}
     preds['MM4'] = mm4.loc[es_prueba, ['u_t1', 'u_t2', 'u_t3', 'u_t4']].mean(axis=1).to_numpy()
@@ -254,7 +181,7 @@ for fold in range(1, N_FOLDS + 1):
 
     # Gradient boosting: mismos hiperparámetros y número de árboles que ganaron en M4
     gb = HistGradientBoostingRegressor(**params_gb, early_stopping=False, random_state=SEMILLA)
-    gb.fit(xgb.loc[es_train, variables_gb], y_relativa[es_train], sample_weight=pesos)
+    gb.fit(xgb.loc[es_train, variables_gb], y_relativa[es_train])
     preds['GradientBoosting'] = gb.predict(xgb.loc[es_prueba, variables_gb]) * nivel_prueba
 
     # LSTM: escala 0-1 con el entrenamiento del fold, 5 semillas y promedio
@@ -264,29 +191,25 @@ for fold in range(1, N_FOLDS + 1):
         valores = lstm_rel.loc[es_train, columnas].to_numpy()
         escala[variable] = (valores.min(), valores.max())
     escala['nivel'] = (nivel[es_train].min(), nivel[es_train].max())
-    if not opciones.sin_tendencia:
-        escala['tendencia'] = (lstm_rel.loc[es_train, 'tendencia'].min(), lstm_rel.loc[es_train, 'tendencia'].max())
     escalada = lstm_rel.copy()
     for variable, (minimo, maximo) in escala.items():
-        columnas = [variable] if variable in ('nivel', 'tendencia') else \
-            [f'{variable}_t{k}' for k in range(1, HISTORIA_LSTM + 1)]
+        columnas = ['nivel'] if variable == 'nivel' else [f'{variable}_t{k}' for k in range(1, HISTORIA_LSTM + 1)]
         escalada[columnas] = (escalada[columnas] - minimo) / (maximo - minimo)
     minimo_ur, maximo_ur = escala['ur']
     y_escalada = ((lstm_rel['y_relativa'] - minimo_ur) / (maximo_ur - minimo_ur)).to_numpy()
+    columnas_fijas = columnas_plato + ['nivel']
     X_train = a_cubo(escalada[es_train], columnas_fijas)
     X_prueba = a_cubo(escalada[es_prueba], columnas_fijas)
     pred_semillas = []
     for semilla in SEMILLAS_LSTM:
         modelo = crear_lstm(params_lstm, X_train.shape[2], semilla)
-        modelo.fit(X_train, y_escalada[es_train], sample_weight=pesos, epochs=epocas_lstm,
-                   batch_size=params_lstm['batch_size'], verbose=0)
+        modelo.fit(X_train, y_escalada[es_train], epochs=epocas_lstm, batch_size=params_lstm['batch_size'], verbose=0)
         relativa = modelo.predict(X_prueba, verbose=0).ravel() * (maximo_ur - minimo_ur) + minimo_ur
         pred_semillas.append(relativa * nivel_prueba)
     preds['LSTM'] = np.mean(pred_semillas, axis=0)
 
     # ARIMA y SARIMA: parámetros de cada plato con su entrenamiento del fold; pronóstico de una semana
-    # adelante en el bloque de prueba con las unidades reales anteriores (igual que M4 y M5).
-    # Con --ventana la serie de cada plato empieza en la ventana; --peso y la tendencia no los afectan.
+    # adelante en el bloque de prueba con las unidades reales anteriores (igual que M4 y M5)
     for nombre, ajustes in [('ARIMA', params_arima), ('SARIMA', params_sarima)]:
         serie_pred = pd.Series(np.nan, index=mm4.index)
         for plato, filas in mm4[es_train | es_prueba].sort_values('semana_objetivo').groupby('plato'):
@@ -312,7 +235,7 @@ for fold in range(1, N_FOLDS + 1):
         print(f'  {nombre}: {sin_valor.sum()} filas con MM4 por falta de parámetros', flush=True)
 
     for nombre, pred in preds.items():
-        resultados.append({'fold': fold, 'modelo': nombre, 'semana_inicio': inicio_prueba.date(),
+        resultados.append({'fold': fold, 'modelo': nombre, 'semana_inicio': pd.Timestamp(semanas_prueba[0]).date(),
                            'semana_fin': pd.Timestamp(semanas_prueba[-1]).date(), 'n': int(es_prueba.sum()),
                            'unidades_reales': int(y_prueba.sum()), **metricas(y_prueba, pred)})
 

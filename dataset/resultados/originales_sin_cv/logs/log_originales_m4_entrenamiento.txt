@@ -1,0 +1,70 @@
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794750791.951639   29412 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1794750798.980640   29412 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+M4 Entrenamiento
+Versiones: pandas 3.0.6, scikit-learn 1.9.1, tensorflow 2.21.0, statsmodels 0.15.0
+GradientBoosting: 144 combinaciones probadas
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+LSTM 1/32: 35 épocas, MAE 0.514
+LSTM 2/32: 24 épocas, MAE 0.513
+LSTM 3/32: 6 épocas, MAE 0.517
+LSTM 4/32: 18 épocas, MAE 0.514
+LSTM 5/32: 33 épocas, MAE 0.511
+LSTM 6/32: 18 épocas, MAE 0.512
+LSTM 7/32: 4 épocas, MAE 0.516
+LSTM 8/32: 9 épocas, MAE 0.511
+LSTM 9/32: 15 épocas, MAE 0.509
+LSTM 10/32: 19 épocas, MAE 0.511
+LSTM 11/32: 12 épocas, MAE 0.509
+LSTM 12/32: 12 épocas, MAE 0.509
+LSTM 13/32: 15 épocas, MAE 0.510
+LSTM 14/32: 19 épocas, MAE 0.510
+LSTM 15/32: 8 épocas, MAE 0.510
+LSTM 16/32: 10 épocas, MAE 0.514
+LSTM 17/32: 49 épocas, MAE 0.516
+LSTM 18/32: 32 épocas, MAE 0.514
+LSTM 19/32: 15 épocas, MAE 0.514
+LSTM 20/32: 9 épocas, MAE 0.513
+LSTM 21/32: 36 épocas, MAE 0.512
+LSTM 22/32: 27 épocas, MAE 0.515
+LSTM 23/32: 13 épocas, MAE 0.511
+LSTM 24/32: 9 épocas, MAE 0.512
+LSTM 25/32: 33 épocas, MAE 0.509
+LSTM 26/32: 17 épocas, MAE 0.511
+LSTM 27/32: 11 épocas, MAE 0.512
+LSTM 28/32: 6 épocas, MAE 0.509
+LSTM 29/32: 37 épocas, MAE 0.508
+LSTM 30/32: 17 épocas, MAE 0.511
+LSTM 31/32: 13 épocas, MAE 0.512
+LSTM 32/32: 7 épocas, MAE 0.508
+LSTM combinación 32 con 5 semillas: MAE 0.515
+LSTM combinación 29 con 5 semillas: MAE 0.509
+LSTM combinación 11 con 5 semillas: MAE 0.513
+ARIMA: 18 combinaciones probadas
+SARIMA: 18 combinaciones probadas
+A1: GradientBoosting: MAE 0.510 frente a MM4 0.620; le gana en 2 de 3 métricas
+A1: LSTM: MAE 0.509 frente a MM4 0.620; le gana en 2 de 3 métricas
+A1: ARIMA: MAE 0.623 frente a MM4 0.620; le gana en 0 de 3 métricas
+A1: SARIMA: MAE 0.581 frente a MM4 0.620; le gana en 2 de 3 métricas
+A2: LSTM con 5 semillas: MAE 0.509 ± 0.001 (de 0.508 a 0.511)
+A3: pronosticar siempre 0 da MAE 0.552 y accuracy 69.8%; 69.8% de las filas de validación tiene 0 unidades
+A4: GradientBoosting: pronostica 238 unidades frente a 675 reales; 77.3% de las filas con menos de 0,05
+A4: LSTM: pronostica 389 unidades frente a 675 reales; 67.5% de las filas con menos de 0,05
+A4: ARIMA: pronostica 688 unidades frente a 675 reales; 41.9% de las filas con menos de 0,05
+A4: SARIMA: pronostica 603 unidades frente a 675 reales; 28.1% de las filas con menos de 0,05
+          modelo  vp  fp  fn  vn
+             MM4 250 313 119 540
+GradientBoosting 119  66 250 787
+            LSTM 177 115 192 738
+           ARIMA 214 234 155 619
+          SARIMA 204 176 165 677
+          modelo  combinacion  mae_validacion  rmse_validacion  smape_validacion  accuracy_validacion  f1_validacion vigente
+             MM4            1        0.620499         1.028715        107.111020             0.646481       0.536481      no
+GradientBoosting           82        0.509801         1.034472         65.046453             0.741408       0.429603      no
+   LSTM_promedio           29        0.509402         0.978373        141.633678             0.749591       0.534369      sí
+           ARIMA           16        0.623224         1.061379        141.929025             0.681669       0.523868      no
+          SARIMA           15        0.581300         0.975194        134.501392             0.720949       0.544726      no
+Hiperparámetros GradientBoosting: l2_regularization=1.0; learning_rate=0.03; loss=absolute_error; max_depth=6; max_features=0.8; min_samples_leaf=20; max_iter=124
+Hiperparámetros LSTM: batch_size=64; capas=2; dropout=0.3; learning_rate=0.001; unidades=16; epocas=32
+234 filas -> ../../dataset/processed/04_entrenamiento.csv; modelos -> ../../modelos/gradient_boosting.joblib, ../../modelos/lstm.keras, ../../modelos/arima.joblib, ../../modelos/sarima.joblib

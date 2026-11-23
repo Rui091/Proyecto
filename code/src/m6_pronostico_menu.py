@@ -47,10 +47,7 @@ import tensorflow as tf # type: ignore
 # Las mismas constantes de M4 y M5: si cambian allá, cambian aquí
 HISTORIA_LSTM = 8
 VARIABLES_LSTM = ['ur', 'precio', 'sin', 'cos']
-VARIABLES_FIJAS = ['nivel', 'tendencia']
 NIVEL_MINIMO = 0.1
-# Tendencia (igual que M3): media de las 8 semanas anteriores frente a la media de hasta 52 semanas activas
-SEMANAS_TENDENCIA = 52
 # Semanas del histórico de la matriz de menú y del reparto por día
 SEMANAS_MENU = 12
 SEMANAS_REPARTO = 26
@@ -208,7 +205,6 @@ print(f"Modelo elegido: {NOMBRE_METODO[modelo_elegido]} (MAE de validación {mae
 # Reglas de los pronósticos (las mismas de M4 y M5)
 # N1: nivel = media de las 8 semanas anteriores del plato + 0,1
 # N2: GradientBoosting y LSTM predicen unidades relativas al nivel; la salida × nivel da unidades
-# N3: tendencia = log((media de 8 semanas + 0,1) / (media de hasta 52 semanas activas + 0,1)), como en M3
 # F1: MM4 = promedio de las 4 semanas anteriores
 # F2: GradientBoosting recibe las mismas variables y en el mismo orden de M4
 # F3: la LSTM usa la escala de entrenamiento guardada en 04_entrenamiento.csv
@@ -220,14 +216,11 @@ print(f"Modelo elegido: {NOMBRE_METODO[modelo_elegido]} (MAE de validación {mae
 # Las 8 semanas anteriores de cada plato modelable, de la más reciente (t1) a la más antigua (t8)
 ventana = []
 for plato in modelables:
-    historia = serie[(serie['plato'] == plato) & (serie['activo'] == 1)].sort_values('semana_inicio')
-    filas = historia.tail(HISTORIA_LSTM)
+    filas = serie[(serie['plato'] == plato) & (serie['activo'] == 1)].sort_values('semana_inicio').tail(HISTORIA_LSTM)
     # C7 la ventana son 8 semanas seguidas que terminan en la última semana de los datos
     assert len(filas) == HISTORIA_LSTM and filas['semana_inicio'].iloc[-1] == ultima_semana and \
         (filas['semana_inicio'].diff().dropna() == pd.Timedelta(days=7)).all(), f'{plato}: ventana incompleta'
-    # N3: media larga con las últimas 52 semanas activas (o las que haya, que son al menos 8)
-    registro = {'plato': plato, 'categoria': filas['categoria'].iloc[0],
-                'media_larga': historia['unidades'].tail(SEMANAS_TENDENCIA).mean()}
+    registro = {'plato': plato, 'categoria': filas['categoria'].iloc[0]}
     semana_anio = filas['semana_inicio'].dt.isocalendar().week.astype(int).to_numpy()
     for k in range(1, HISTORIA_LSTM + 1):
         # Posición -k: t1 es la semana más reciente
@@ -243,8 +236,6 @@ assert ventana.notna().all().all(), 'Hay valores vacíos en las ventanas de la s
 # N1: nivel de cada plato
 media_8 = ventana[[f'u_t{k}' for k in range(1, HISTORIA_LSTM + 1)]].mean(axis=1)
 nivel = (media_8 + NIVEL_MINIMO).to_numpy()
-# N3: tendencia de cada plato para la semana a pronosticar
-tendencia_plato = np.log((media_8 + NIVEL_MINIMO) / (ventana['media_larga'] + NIVEL_MINIMO)).to_numpy()
 pronosticos = pd.DataFrame({'plato': ventana['plato']})
 
 # F1: MM4
@@ -262,8 +253,6 @@ X_gb['semana_cos'] = np.cos(2 * np.pi * semana_anio_pronostico / 52)
 X_gb['mes'] = semana_pronostico.month
 X_gb['precio_t1'] = ventana['precio_t1']
 X_gb['media_8'] = media_8
-assert 'tendencia' in variables_gb, 'El gradient boosting guardado no usa la tendencia (¿M4 se corrió sin ella?)'
-X_gb['tendencia'] = tendencia_plato
 for indice, fila in ventana.iterrows():
     for columna in [f"plato_{fila['plato']}", f"categoria_{fila['categoria']}"]:
         assert columna in X_gb.columns, f'El modelo no conoce {columna}'
@@ -280,14 +269,13 @@ lstm_escalada = ventana.copy()
 for k in range(1, HISTORIA_LSTM + 1):
     lstm_escalada[f'ur_t{k}'] = lstm_escalada[f'u_t{k}'] / nivel
 lstm_escalada['nivel'] = nivel
-lstm_escalada['tendencia'] = tendencia_plato
 for variable, (minimo, maximo) in escala.items():
-    columnas = [variable] if variable in VARIABLES_FIJAS else [f'{variable}_t{k}' for k in range(1, HISTORIA_LSTM + 1)]
+    columnas = ['nivel'] if variable == 'nivel' else [f'{variable}_t{k}' for k in range(1, HISTORIA_LSTM + 1)]
     lstm_escalada[columnas] = (lstm_escalada[columnas] - minimo) / (maximo - minimo)
 for columna in columnas_plato:
     lstm_escalada[columna] = (columna == 'plato_' + lstm_escalada['plato']).astype(int)
 minimo_ur, maximo_ur = escala['ur']
-relativa = modelo_lstm.predict(a_cubo(lstm_escalada, columnas_plato + VARIABLES_FIJAS), verbose=0).ravel() \
+relativa = modelo_lstm.predict(a_cubo(lstm_escalada, columnas_plato + ['nivel']), verbose=0).ravel() \
     * (maximo_ur - minimo_ur) + minimo_ur
 pronosticos['pred_lstm'] = relativa * nivel
 
